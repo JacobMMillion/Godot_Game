@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://demx3rfl2ini7"]
 
-[ext_resource type="Script" path="res://scenes/ai_slime.gd" id="1_gbfhp"]
+[ext_resource type="Script" path="res://scripts/ai_slime.gd" id="1_5j2r1"]
 [ext_resource type="Texture2D" uid="uid://da8os1suxlx7q" path="res://assets/sprites/slime_purple.png" id="2_dyi7j"]
 [ext_resource type="PackedScene" uid="uid://co4ru7g5ms0pr" path="res://scenes/killzone.tscn" id="3_wfl3f"]
 
@@ -79,6 +79,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ixtre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js4tm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vlat")
 }],
 "loop": true,
 "name": &"default",
@@ -89,7 +95,7 @@ animations = [{
 size = Vector2(10, 10)
 
 [node name="slime" type="Node2D"]
-script = ExtResource("1_gbfhp")
+script = ExtResource("1_5j2r1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_j7nij")
