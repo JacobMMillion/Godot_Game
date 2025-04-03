@@ -8,6 +8,10 @@ extends Node2D
 
 const SPEED = 40
 
+func _ready():
+	# Add to slimes group
+	add_to_group("slimes")
+
 func _process(delta: float) -> void:
 	# Make sure the player exists
 	if not player:

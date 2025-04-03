@@ -7,6 +7,10 @@ extends Node2D
 const SPEED = 60
 var direction = 1
 
+func _ready():
+	# Add to slimes group
+	add_to_group("slimes")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
