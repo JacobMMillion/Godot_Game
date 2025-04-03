@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://deok630spq6n8"]
+[gd_scene load_steps=44 format=3 uid="uid://deok630spq6n8"]
 
 [ext_resource type="PackedScene" uid="uid://dd4pxg5kaoi3j" path="res://scenes/player.tscn" id="1_7otjh"]
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_8oh4p"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://demx3rfl2ini7" path="res://scenes/ai_slime.tscn" id="11_3teii"]
 [ext_resource type="Script" path="res://scenes/octopus.gd" id="12_gxty0"]
 [ext_resource type="Texture2D" uid="uid://b3wu6dy2xetry" path="res://assets/sprites/octopus/Walk.png" id="13_mht2j"]
+[ext_resource type="FontFile" uid="uid://4f8wk8lv1a0s" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="16_5j0pu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dnomf"]
 texture = ExtResource("3_0n4yu")
@@ -537,4 +538,22 @@ position = Vector2(255, -504)
 position = Vector2(87, 8)
 shape = SubResource("SegmentShape2D_8ujt1")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 23.0
+offset_top = 19.0
+offset_right = 271.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("16_5j0pu")
+theme_override_font_sizes/font_size = 22
+text = "HI MY NAME IS"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="level2_button" to="." method="_on_level_2_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

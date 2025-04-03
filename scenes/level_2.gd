@@ -1,9 +1,6 @@
 extends Node2D
 @onready var timer = $Timer
-@onready var time_label = $CanvasLayer/TimerLabel
-
-func _on_level_2_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/level2.tscn")
+@onready var time_label = $CanvasLayer/TimerLabel2
 
 func _ready():
 	timer.start()  

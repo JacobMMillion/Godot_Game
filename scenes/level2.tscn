@@ -1,5 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://pxgrb7msdbhb"]
+[gd_scene load_steps=33 format=3 uid="uid://pxgrb7msdbhb"]
 
+[ext_resource type="Script" path="res://scenes/level_2.gd" id="1_oai3m"]
 [ext_resource type="Script" path="res://scripts/gamemanager.gd" id="1_sm5xb"]
 [ext_resource type="FontFile" uid="uid://d7wxstf2lfc5" path="res://assets/fonts/PixelOperator8.ttf" id="2_ltamc"]
 [ext_resource type="Texture2D" uid="uid://yipy55iklpe1" path="res://assets/sprites/world_tileset.png" id="3_d5q7r"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bgyknjarm1o23" path="res://scenes/platform.tscn" id="7_agwcl"]
 [ext_resource type="PackedScene" uid="uid://wgjxqck70vdh" path="res://scenes/slime.tscn" id="8_dv508"]
 [ext_resource type="PackedScene" uid="uid://crb5y4dedy2ks" path="res://scenes/coin.tscn" id="8_pvl7r"]
+[ext_resource type="FontFile" uid="uid://4f8wk8lv1a0s" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="10_5484f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dnomf"]
 texture = ExtResource("3_d5q7r")
@@ -426,6 +428,7 @@ _data = {
 }
 
 [node name="level2" type="Node2D"]
+script = ExtResource("1_oai3m")
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -652,3 +655,18 @@ position = Vector2(-1200, -345)
 
 [node name="slime5" parent="Slimes" instance=ExtResource("8_dv508")]
 position = Vector2(-1106, 353)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 75.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TimerLabel2" type="Label" parent="CanvasLayer"]
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 51.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("10_5484f")
+theme_override_font_sizes/font_size = 22
