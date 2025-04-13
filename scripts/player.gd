@@ -88,6 +88,9 @@ func is_player_rolling() -> bool:
 
 # Called by the gun when the player overlaps it.
 func pick_up_gun(gun: Node) -> void:
+	
+	gun.picked_up = true
+	
 	var socket_node: Node
 	# Choose the socket based on the current facing direction.
 	if animated_sprite.flip_h == true:

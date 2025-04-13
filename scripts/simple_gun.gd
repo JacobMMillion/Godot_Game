@@ -1,5 +1,7 @@
 extends Area2D
 
+var picked_up: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Connect the "body_entered" signal to detect the player colliding with the gun.
@@ -7,14 +9,41 @@ func _ready() -> void:
 
 # Called every frame.
 func _process(delta: float) -> void:
-	look_at(get_global_mouse_position())
+	if picked_up:
+		# Compute the raw angle from the gun to the mouse.
+		var raw_angle: float = (get_global_mouse_position() - global_position).angle()
+		# Convert to degrees for easier clamping.
+		var raw_deg: float = rad_to_deg(raw_angle)
+		
+		# Normalize raw_deg to the range [-180, 180)
+		if raw_deg >= 180:
+			raw_deg -= 360
 
-	rotation_degrees = wrap(rotation_degrees, 0, 360)
-	
-	if rotation_degrees > 90 and rotation_degrees < 270:
-		scale.y = -1
-	else:
-		scale.y = 1
+		# Determine allowed angle range based on the parent's name.
+		# (Assumes the parent's name is either "GunSocketRight" or "GunSocketLeft")
+		if get_parent().name == "GunSocketRight":
+			# When on the right socket, allow aiming only between -90° and +90°.
+			var clamped_deg: float = clamp(raw_deg, -90, 90)
+			rotation = deg_to_rad(clamped_deg)
+		else:
+			# When on the left socket, allow aiming only between 90° and 270°.
+			# If raw_deg is negative, add 360 to work with a 0 to 360 range.
+			var pos_deg: float = raw_deg
+			if pos_deg < 0:
+				pos_deg += 360
+			var clamped_deg: float = clamp(pos_deg, 90, 270)
+			rotation = deg_to_rad(clamped_deg)
+		
+		# Now, mirror the sprite based on the final rotation angle.
+		# Calculate the final angle in degrees.
+		var final_deg: float = rad_to_deg(rotation)
+		# Use the same rule as before:
+		# If the angle is between 90° and 270°, flip the y-scale.
+		if final_deg > 90 and final_deg < 270:
+			scale.y = -1
+		else:
+			scale.y = 1
+
 
 # Signal callback triggered when a body enters the Area2D.
 func _on_body_entered(body: Node) -> void:
