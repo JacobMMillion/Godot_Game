@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://demx3rfl2ini7"]
+[gd_scene load_steps=18 format=3 uid="uid://demx3rfl2ini7"]
 
 [ext_resource type="Script" path="res://scripts/ai_slime.gd" id="1_5j2r1"]
 [ext_resource type="Texture2D" uid="uid://da8os1suxlx7q" path="res://assets/sprites/slime_purple.png" id="2_dyi7j"]
@@ -94,7 +94,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eoxl2"]
 size = Vector2(10, 10)
 
-[node name="slime" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgc2x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp56e"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="slime" type="Area2D"]
 script = ExtResource("1_5j2r1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -103,7 +108,7 @@ autoplay = "default"
 
 [node name="killzone" parent="AnimatedSprite2D" instance=ExtResource("3_wfl3f")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/killzone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/killzone" groups=["enemies"]]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_eoxl2")
 
@@ -114,3 +119,15 @@ target_position = Vector2(10, 0)
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, 5)
 target_position = Vector2(-10, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+scale = Vector2(0.7, 0.7)
+shape = SubResource("RectangleShape2D_cgc2x")
+
+[node name="HealthBarLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="HealthBarLayer"]
+offset_right = 4.0
+offset_bottom = 27.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_jp56e")

@@ -25,7 +25,9 @@ func _physics_process(delta: float) -> void:
 		
 		velocity.x = roll_direction * ROLL_SPEED
 		animated_sprite.play("roll")
-		check_slime_collisions()
+		
+		# MODIFIACTION: do not kill slime
+		# check_slime_collisions()
 		move_and_slide()
 		return  # Skip normal movement during roll
 	

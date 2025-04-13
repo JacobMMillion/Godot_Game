@@ -1,6 +1,7 @@
 extends Area2D
 
 var picked_up: bool = false
+const BULLET = preload("res://scenes/simple_bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,6 +44,14 @@ func _process(delta: float) -> void:
 			scale.y = -1
 		else:
 			scale.y = 1
+			
+			
+		# SHOOTING
+		if Input.is_action_just_pressed("shoot"):
+				var bullet_instance = BULLET.instantiate()
+				get_tree().root.add_child(bullet_instance)
+				bullet_instance.global_position = global_position
+				bullet_instance.rotation = rotation
 
 
 # Signal callback triggered when a body enters the Area2D.
