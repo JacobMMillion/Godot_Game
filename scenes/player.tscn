@@ -231,7 +231,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_u56wq"]
 radius = 5.09902
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
 collision_layer = 2
 
@@ -245,3 +245,9 @@ frame_progress = 0.905393
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_u56wq")
+
+[node name="GunSocketLeft" type="Node2D" parent="."]
+position = Vector2(-4, -5)
+
+[node name="GunSocketRight" type="Node2D" parent="."]
+position = Vector2(4, -5)

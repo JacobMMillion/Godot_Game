@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0peenktlwjg7"]
+
+[ext_resource type="Texture2D" uid="uid://cc17ojjsruyg4" path="res://assets/sprites/guns/Pack 1/2px/53.png" id="1_arfu3"]
+[ext_resource type="Script" path="res://scripts/simple_gun.gd" id="1_ckysk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpm7r"]
+
+[node name="SimpleGun" type="Area2D"]
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_ckysk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_arfu3")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(7, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wpm7r")
