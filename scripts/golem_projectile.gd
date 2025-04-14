@@ -10,6 +10,7 @@ var direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	lifetime = max_lifetime
+	connect("body_entered", Callable(self, "_on_Area2D_body_entered"))
 
 func _physics_process(delta: float) -> void:
 	# Determine the movement direction: toward the player if possible or fallback
@@ -31,6 +32,8 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_Area2D_body_entered(body: Node) -> void:
+	
 	if body.is_in_group("player"):
-		print("player hit")
+		print(" → player hit by projectile")
 		queue_free()
+		body.die()

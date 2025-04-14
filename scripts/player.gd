@@ -127,3 +127,15 @@ func update_gun_socket() -> void:
 			equipped_gun.get_parent().remove_child(equipped_gun)
 			desired_socket.add_child(equipped_gun)
 			equipped_gun.position = Vector2.ZERO
+
+func die() -> void:
+	print("Player died!")
+	set_physics_process(false)
+
+	# Play death animation
+	animated_sprite.play("death")
+
+	# Wait for the animation to finish before restarting the scene
+	await animated_sprite.animation_finished
+
+	get_tree().reload_current_scene()
