@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://demx3rfl2ini7"]
+[gd_scene load_steps=19 format=3 uid="uid://demx3rfl2ini7"]
 
 [ext_resource type="Script" path="res://scripts/ai_slime.gd" id="1_5j2r1"]
 [ext_resource type="Texture2D" uid="uid://da8os1suxlx7q" path="res://assets/sprites/slime_purple.png" id="2_dyi7j"]
@@ -96,8 +96,19 @@ size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgc2x"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6umrr"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp56e"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(1, 0, 0, 0.513726)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="slime" type="Area2D"]
 script = ExtResource("1_5j2r1")
@@ -130,4 +141,5 @@ shape = SubResource("RectangleShape2D_cgc2x")
 [node name="HealthBar" type="ProgressBar" parent="HealthBarLayer"]
 offset_right = 4.0
 offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6umrr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jp56e")

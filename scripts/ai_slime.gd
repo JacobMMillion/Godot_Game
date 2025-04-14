@@ -15,7 +15,7 @@ func _ready():
 	add_to_group("enemies")
 
 	# ─── INITIALIZE HEALTH BAR ────────────────────────────────────────────
-	health_bar.custom_minimum_size = Vector2(64, 8)
+	health_bar.custom_minimum_size = Vector2(64, 6)
 	health_bar.min_value = 0
 	health_bar.max_value = MAX_HEALTH
 	health_bar.value     = current_health
@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 	var canvas_t: Transform2D = get_viewport().get_canvas_transform()
 	var screen_pos: Vector2  = canvas_t * global_position
 	var bar_w: float         = health_bar.size.x
-	health_bar.position     = screen_pos + Vector2(-bar_w * 0.5, -40)
+	health_bar.position     = screen_pos + Vector2(-bar_w * 0.5, -45)
 	# ────────────────────────────────────────────────────────────────────────
 
 # ─── ADD THESE FUNCTIONS AT THE BOTTOM ─────────────────────────────────

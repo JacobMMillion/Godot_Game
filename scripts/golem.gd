@@ -21,12 +21,17 @@ const WANDER_STIFFNESS_Y  := 0.5    # how strongly Y snaps to wander offset
 @onready var health_bar:       ProgressBar     = $HealthBarLayer/HealthBar
 @onready var collision_shape:  CollisionShape2D = $CollisionShape2D
 
-# direct path to your player node
+# direct path to player node
 @onready var player: Node2D = get_node("/root/level1/player")
 
+# projectile stuff
 const PROJECTILE_SCENE = preload("res://scenes/golem_projectile.tscn")
 @onready var muzzle_right: Node2D = $AnimatedSprite2D/ArmMuzzleR
 @onready var muzzle_left: Node2D = $AnimatedSprite2D/ArmMuzzleL
+
+# explosions
+const EXPLOSION_SCENE = preload("res://scenes/projectile_explosion.tscn")
+const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
 
 var is_defending:    bool  = false
 var is_dead: 		 bool = false
@@ -166,8 +171,37 @@ func die() -> void:
 	collision_shape.disabled = true
 	health_bar.hide()
 	animated_sprite.play("death")
+	
+	# Start spawning explosions concurrently.
+	# (We launch it but do not await its completion; it runs while we wait for the death animation.)
+	spawn_explosions_while_dying()
+	
 	await animated_sprite.animation_finished
 	queue_free()
+	
+func spawn_explosions_while_dying() -> void:
+	# Continue spawning effects as long as the death animation is playing.
+	while animated_sprite.is_playing() and animated_sprite.animation == "death":
+		# Generate a random offset for the explosion effect in local space.
+		var explosion_offset = Vector2(randf_range(-20, 20), randf_range(-15, 20))
+		var explosion_global_pos = animated_sprite.to_global(explosion_offset)
+		
+		var explosion = EXPLOSION_SCENE.instantiate()
+		explosion.scale = Vector2(0.5, 0.5)
+		explosion.global_position = explosion_global_pos
+		get_tree().current_scene.add_child(explosion)
+		
+		# Generate a different random offset for the launch effect in local space.
+		var launch_offset = Vector2(randf_range(-20, 20), randf_range(-15, 20))
+		var launch_global_pos = animated_sprite.to_global(launch_offset)
+		
+		var launch_effect = SMALL_EXPLOSION_SCENE.instantiate()
+		launch_effect.scale = Vector2(0.5, 0.5)
+		launch_effect.global_position = launch_global_pos
+		get_tree().current_scene.add_child(launch_effect)
+		
+		# Wait a short time before spawning the next set of effects.
+		await get_tree().create_timer(0.8).timeout
 
 # ─── Power‑move stubs ─────────────────────────────────────────────────────────
 func _do_defend() -> void:

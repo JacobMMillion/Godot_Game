@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://wgjxqck70vdh"]
+[gd_scene load_steps=13 format=3 uid="uid://wgjxqck70vdh"]
 
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_hh4jo"]
 [ext_resource type="Texture2D" uid="uid://evgu82hlk3ed" path="res://assets/sprites/slime_green.png" id="1_ua0y3"]
@@ -45,8 +45,19 @@ size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8iep"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uc7ma"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_075c7"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(1, 0, 0, 0.513726)
 
 [node name="slime" type="Area2D" groups=["enemies"]]
 collision_layer = 3
@@ -82,4 +93,5 @@ shape = SubResource("RectangleShape2D_t8iep")
 [node name="HealthBar" type="ProgressBar" parent="HealthBarLayer"]
 offset_right = 4.0
 offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_uc7ma")
 theme_override_styles/fill = SubResource("StyleBoxFlat_075c7")
