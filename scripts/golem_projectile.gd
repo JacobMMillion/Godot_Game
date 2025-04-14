@@ -35,5 +35,6 @@ func _on_Area2D_body_entered(body: Node) -> void:
 	
 	if body.is_in_group("player"):
 		print(" → player hit by projectile")
+		# want to add explosion here
 		queue_free()
 		body.die()
