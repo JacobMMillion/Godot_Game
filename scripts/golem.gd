@@ -24,6 +24,9 @@ const WANDER_STIFFNESS_Y  := 0.5    # how strongly Y snaps to wander offset
 # direct path to your player node
 @onready var player: Node2D = get_node("/root/level1/player")
 
+const PROJECTILE_SCENE = preload("res://scenes/golem_projectile.tscn")
+@onready var arm_muzzle: Node2D = $AnimatedSprite2D/ArmMuzzle
+
 var is_defending:    bool  = false
 var current_health:  int   = 500
 const MAX_HEALTH     := 500
@@ -57,30 +60,31 @@ func _ready() -> void:
 # ─── AI loop ──────────────────────────────────────────────────────────────────
 func _action_loop() -> void:
 	while true:
-		# switch to idle
 		animated_sprite.play(DEFAULT_ANIM)
-
-		# wait a bit
 		await get_tree().create_timer(randf_range(MIN_DELAY, MAX_DELAY)).timeout
 
-		# pick an action
 		var action = actions[randi() % actions.size()]
-
-		# invulnerable during defend
 		if action == "defend":
 			is_defending = true
 
 		animated_sprite.play(action)
+
+		if action == "extend_arm":
+			# wait until we hit frame 8
+			while animated_sprite.frame != 8:
+				await animated_sprite.frame_changed
+			_do_shoot_bullet()
+
+		# now wait for the rest of the animation to finish
 		await animated_sprite.animation_finished
 
 		match action:
 			"defend":
 				_do_defend()
 				is_defending = false
-			"extend_arm":
-				_do_shoot_bullet()
 			"prepare_laser":
 				_do_shoot_laser()
+		# (we already handled extend_arm)
 
 # ─── Movement ────────────────────────────────────────────────────────────────
 func _physics_process(delta: float) -> void:
@@ -146,8 +150,15 @@ func _do_defend() -> void:
 	health_bar.value = current_health
 
 func _do_shoot_bullet() -> void:
-	# your bullet logic here
-	pass
+	# 1) Instance the projectile
+	var b = PROJECTILE_SCENE.instantiate()
+	# 2) Spawn it at the muzzle
+	b.global_position = arm_muzzle.global_position
+	# 3) Give it a direction based on facing
+	var dir = Vector2.LEFT if animated_sprite.flip_h else Vector2.RIGHT
+	b.direction = dir
+	# 4) Add it into the scene
+	get_tree().current_scene.add_child(b)
 
 func _do_shoot_laser() -> void:
 	# your laser logic here

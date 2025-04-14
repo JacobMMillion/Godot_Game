@@ -671,12 +671,18 @@ shape = SubResource("RectangleShape2D_y6b4n")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1.53846, 1.53846)
 sprite_frames = SubResource("SpriteFrames_qpp8p")
-animation = &"prepare_laser"
+animation = &"extend_arm"
+frame = 7
+
+[node name="ArmMuzzle" type="Node2D" parent="AnimatedSprite2D"]
+position = Vector2(35.3846, -13.0769)
 
 [node name="HealthBarLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" type="ProgressBar" parent="HealthBarLayer"]
-offset_right = 4.0
-offset_bottom = 27.0
+offset_left = -2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 28.0
 theme_override_styles/background = SubResource("StyleBoxFlat_c8brn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hi4kl")
