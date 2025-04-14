@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://wgjxqck70vdh" path="res://scenes/slime.tscn" id="7_1ptde"]
 [ext_resource type="PackedScene" uid="uid://crb5y4dedy2ks" path="res://scenes/coin.tscn" id="10_cksh1"]
 [ext_resource type="PackedScene" uid="uid://demx3rfl2ini7" path="res://scenes/ai_slime.tscn" id="11_3teii"]
-[ext_resource type="Script" path="res://scenes/octopus.gd" id="12_gxty0"]
+[ext_resource type="Script" path="res://scripts/octopus.gd" id="12_gxty0"]
 [ext_resource type="Texture2D" uid="uid://b3wu6dy2xetry" path="res://assets/sprites/octopus/Walk.png" id="13_mht2j"]
 [ext_resource type="FontFile" uid="uid://4f8wk8lv1a0s" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="16_5j0pu"]
 [ext_resource type="PackedScene" uid="uid://d0peenktlwjg7" path="res://scenes/simple_gun.tscn" id="17_kt5fa"]
