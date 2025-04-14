@@ -6,11 +6,10 @@ const DEFAULT_ANIM := "idle"
 @onready var health_bar: ProgressBar = $HealthBarLayer/HealthBar
 @onready var collision_shape: CollisionShape2D   = $CollisionShape2D
 
-const SPEED = 60
-var direction = 1
+var is_defending: bool = false
 
-var MAX_HEALTH:    int = 200
-var current_health: int = 200
+var MAX_HEALTH:    int = 500
+var current_health: int = 500
 
 var actions = ["defend", "extend_arm", "prepare_laser"]
 const MIN_DELAY := 4.0
@@ -39,19 +38,25 @@ func _action_loop() -> void:
 
 		# 2) pick & play
 		var action = actions[randi() % actions.size()]
+		
+		# if defending, take no damage
+		if action == "defend":
+			is_defending = true
+			
 		animated_sprite.play(action)
 
-		# 3) do the side‐effect for that action
-		#match action:
-			#"defend":
-				#_do_defend()
+		# 3) wait for the animation to finish before looping
+		await animated_sprite.animation_finished
+		
+		# 4) do the side‐effect for that action
+		match action:
+			"defend":
+				_do_defend()
+				is_defending = false
 			#"extend_arm":
 				#_do_shoot_bullet()
 			#"prepare_laser":
 				#_do_shoot_laser()
-
-		# 4) wait for the animation to finish before looping
-		await animated_sprite.animation_finished
 
 func _process(delta: float) -> void:
 	# Movement logic
@@ -66,12 +71,16 @@ func _process(delta: float) -> void:
 
 # Called when the enemy takes damage.
 func take_damage(amount: int) -> void:
+	
+	if is_defending:
+		return   # ignore all damage while defending
+		
 	current_health = max(current_health - amount, 0)
 	health_bar.value = current_health
 	if current_health == 0:
 		die()
 	else:
-		call_deferred("update")  # redraw the health bar with the new value
+		health_bar.value = current_health
 
 func die() -> void:
 	collision_shape.disabled = true
@@ -79,3 +88,12 @@ func die() -> void:
 	animated_sprite.play("death")
 	await animated_sprite.animation_finished
 	queue_free()
+
+
+
+# power moves
+func _do_defend() -> void:
+	# heal 20 HP, clamp to max, update bar
+	var heal_amount = 250
+	current_health = min(current_health + heal_amount, MAX_HEALTH)
+	health_bar.value = current_health
