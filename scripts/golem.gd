@@ -29,8 +29,10 @@ const PROJECTILE_SCENE = preload("res://scenes/golem_projectile.tscn")
 @onready var muzzle_left: Node2D = $AnimatedSprite2D/ArmMuzzleL
 
 var is_defending:    bool  = false
-var current_health:  int   = 1000
-const MAX_HEALTH     := 1000
+var is_dead: 		 bool = false
+
+var current_health:  int   = 100
+const MAX_HEALTH     := 100
 
 var actions = ["defend", "extend_arm", "prepare_laser"]
 const MIN_DELAY := 3.0
@@ -138,6 +140,8 @@ func take_damage(amount: int) -> void:
 		die()
 
 func die() -> void:
+	is_dead = true
+	animated_sprite.stop()    # immediately stop the current animation
 	collision_shape.disabled = true
 	health_bar.hide()
 	animated_sprite.play("death")
@@ -146,7 +150,7 @@ func die() -> void:
 
 # ─── Power‑move stubs ─────────────────────────────────────────────────────────
 func _do_defend() -> void:
-	var heal_amount = 500
+	var heal_amount = 350
 	current_health = min(current_health + heal_amount, MAX_HEALTH)
 	health_bar.value = current_health
 
@@ -159,8 +163,9 @@ func _do_shoot_bullet() -> void:
 	b.global_position = muzzle.global_position
 	# 4) Give it a direction based on facing
 	b.direction = Vector2.LEFT  if animated_sprite.flip_h else Vector2.RIGHT
-	# 5) Add it into the scene
-	get_tree().current_scene.add_child(b)
+	# 5) Add it into the scene, as long as is alive
+	if not is_dead:
+		get_tree().current_scene.add_child(b)
 
 func _do_shoot_laser() -> void:
 	# your laser logic here
