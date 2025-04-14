@@ -25,15 +25,16 @@ const WANDER_STIFFNESS_Y  := 0.5    # how strongly Y snaps to wander offset
 @onready var player: Node2D = get_node("/root/level1/player")
 
 const PROJECTILE_SCENE = preload("res://scenes/golem_projectile.tscn")
-@onready var arm_muzzle: Node2D = $AnimatedSprite2D/ArmMuzzle
+@onready var muzzle_right: Node2D = $AnimatedSprite2D/ArmMuzzleR
+@onready var muzzle_left: Node2D = $AnimatedSprite2D/ArmMuzzleL
 
 var is_defending:    bool  = false
-var current_health:  int   = 500
-const MAX_HEALTH     := 500
+var current_health:  int   = 1000
+const MAX_HEALTH     := 1000
 
 var actions = ["defend", "extend_arm", "prepare_laser"]
-const MIN_DELAY := 4.0
-const MAX_DELAY := 4.0
+const MIN_DELAY := 3.0
+const MAX_DELAY := 7.0
 
 # bob timer
 var bob_timer: float = 0.0
@@ -145,19 +146,20 @@ func die() -> void:
 
 # ─── Power‑move stubs ─────────────────────────────────────────────────────────
 func _do_defend() -> void:
-	var heal_amount = 250
+	var heal_amount = 500
 	current_health = min(current_health + heal_amount, MAX_HEALTH)
 	health_bar.value = current_health
 
 func _do_shoot_bullet() -> void:
 	# 1) Instance the projectile
 	var b = PROJECTILE_SCENE.instantiate()
-	# 2) Spawn it at the muzzle
-	b.global_position = arm_muzzle.global_position
-	# 3) Give it a direction based on facing
-	var dir = Vector2.LEFT if animated_sprite.flip_h else Vector2.RIGHT
-	b.direction = dir
-	# 4) Add it into the scene
+	# 2) Choose the correct muzzle based on flip_h
+	var muzzle = muzzle_left if animated_sprite.flip_h else muzzle_right
+	# 3) Spawn it at that muzzle
+	b.global_position = muzzle.global_position
+	# 4) Give it a direction based on facing
+	b.direction = Vector2.LEFT  if animated_sprite.flip_h else Vector2.RIGHT
+	# 5) Add it into the scene
 	get_tree().current_scene.add_child(b)
 
 func _do_shoot_laser() -> void:

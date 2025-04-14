@@ -674,8 +674,11 @@ sprite_frames = SubResource("SpriteFrames_qpp8p")
 animation = &"extend_arm"
 frame = 7
 
-[node name="ArmMuzzle" type="Node2D" parent="AnimatedSprite2D"]
+[node name="ArmMuzzleR" type="Node2D" parent="AnimatedSprite2D"]
 position = Vector2(35.3846, -13.0769)
+
+[node name="ArmMuzzleL" type="Node2D" parent="AnimatedSprite2D"]
+position = Vector2(-38.4615, -13.0769)
 
 [node name="HealthBarLayer" type="CanvasLayer" parent="."]
 
