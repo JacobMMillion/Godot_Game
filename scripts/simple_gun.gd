@@ -1,8 +1,10 @@
 extends Area2D
 
 var picked_up: bool = false
-const BULLET = preload("res://scenes/simple_bullet.tscn")
 var player_ref: Node = null
+
+@onready var muzzle: Node2D = $Muzzle
+const BULLET = preload("res://scenes/simple_bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,11 +55,13 @@ func _process(delta: float) -> void:
 			
 		# SHOOTING
 		if Input.is_action_just_pressed("shoot"):
-				var bullet_instance = BULLET.instantiate()
-				get_tree().root.add_child(bullet_instance)
-				bullet_instance.global_position = global_position
-				bullet_instance.rotation = rotation
+			# Capture the muzzle's global position immediately.
+			var muzzle_pos = muzzle.global_position
 
+			var bullet_instance = BULLET.instantiate()
+			get_tree().root.add_child(bullet_instance)
+			bullet_instance.global_position = muzzle_pos
+			bullet_instance.rotation = rotation
 
 # Signal callback triggered when a body enters the Area2D.
 func _on_body_entered(body: Node) -> void:

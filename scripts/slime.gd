@@ -14,7 +14,7 @@ var current_health: int = 100
 
 func _ready() -> void:
 	add_to_group("enemies")
-	health_bar.custom_minimum_size = Vector2(64, 8)
+	health_bar.custom_minimum_size = Vector2(64, 6)
 	health_bar.min_value = 0
 	health_bar.max_value = MAX_HEALTH
 	health_bar.value = current_health
@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 
 	# Center the ProgressBar by subtracting half its width
 	var bar_w: float = health_bar.size.x
-	health_bar.position = screen_pos + Vector2(-bar_w * 0.5, -40)
+	health_bar.position = screen_pos + Vector2(-bar_w * 0.5, -45)
 
 # Called when the enemy takes damage.
 func take_damage(amount: int) -> void:

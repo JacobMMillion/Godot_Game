@@ -8,14 +8,14 @@ var direction: Vector2 = Vector2.ZERO
 
 @onready var player: Node2D = get_node("/root/level1/player")
 const EXPLOSION_SCENE = preload("res://scenes/projectile_explosion.tscn")
-const LAUNCH_SCENE = preload("res://scenes/projectile_launch.tscn")
+const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
 
 func _ready() -> void:
 	lifetime = max_lifetime
 	connect("body_entered", Callable(self, "_on_Area2D_body_entered"))
 	
 	# Instantiate the launch animation effect
-	var launch_effect = LAUNCH_SCENE.instantiate()
+	var launch_effect = SMALL_EXPLOSION_SCENE.instantiate()
 	launch_effect.global_position = global_position
 	get_tree().current_scene.add_child(launch_effect)
 

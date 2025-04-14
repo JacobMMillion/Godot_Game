@@ -31,7 +31,7 @@ const PROJECTILE_SCENE = preload("res://scenes/golem_projectile.tscn")
 
 # explosions
 const EXPLOSION_SCENE = preload("res://scenes/projectile_explosion.tscn")
-const LAUNCH_SCENE = preload("res://scenes/projectile_launch.tscn")
+const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
 
 var is_defending:    bool  = false
 var is_dead: 		 bool = false
@@ -195,7 +195,7 @@ func spawn_explosions_while_dying() -> void:
 		var launch_offset = Vector2(randf_range(-20, 20), randf_range(-15, 20))
 		var launch_global_pos = animated_sprite.to_global(launch_offset)
 		
-		var launch_effect = LAUNCH_SCENE.instantiate()
+		var launch_effect = SMALL_EXPLOSION_SCENE.instantiate()
 		launch_effect.scale = Vector2(0.5, 0.5)
 		launch_effect.global_position = launch_global_pos
 		get_tree().current_scene.add_child(launch_effect)
