@@ -16,6 +16,9 @@ const ROLL_DURATION: float = 0.5  # Roll lasts 0.5 seconds
 # Reference to the currently equipped gun, if any.
 var equipped_gun: Node = null
 
+# Death
+var is_dead = false
+
 func _physics_process(delta: float) -> void:
 	# Handle roll timer.
 	if is_rolling:
@@ -129,6 +132,7 @@ func update_gun_socket() -> void:
 			equipped_gun.position = Vector2.ZERO
 
 func die() -> void:
+	is_dead = true
 	print("Player died!")
 	set_physics_process(false)
 
