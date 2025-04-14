@@ -63,8 +63,16 @@ func _ready() -> void:
 # ─── AI loop ──────────────────────────────────────────────────────────────────
 func _action_loop() -> void:
 	while true:
+		# Check if already dead before doing anything.
+		if is_dead:
+			break
+
 		animated_sprite.play(DEFAULT_ANIM)
 		await get_tree().create_timer(randf_range(MIN_DELAY, MAX_DELAY)).timeout
+		
+		# Again, ensure that the enemy hasn't died during the wait.
+		if is_dead:
+			break
 
 		var action = actions[randi() % actions.size()]
 		if action == "defend":
@@ -73,13 +81,25 @@ func _action_loop() -> void:
 		animated_sprite.play(action)
 
 		if action == "extend_arm":
-			# wait until we hit frame 8
+			# Wait until we hit frame 8
 			while animated_sprite.frame != 8:
+				# Always check for death in the loop
+				if is_dead:
+					break
 				await animated_sprite.frame_changed
+			
+			# If died during the loop, break early.
+			if is_dead:
+				break
+
 			_do_shoot_bullet()
 
-		# now wait for the rest of the animation to finish
+		# Wait for the rest of the animation to finish
 		await animated_sprite.animation_finished
+
+		# Exit if died during the animation
+		if is_dead:
+			break
 
 		match action:
 			"defend":
@@ -87,6 +107,7 @@ func _action_loop() -> void:
 				is_defending = false
 			"prepare_laser":
 				_do_shoot_laser()
+
 		# (we already handled extend_arm)
 
 # ─── Movement ────────────────────────────────────────────────────────────────

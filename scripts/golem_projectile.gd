@@ -10,20 +10,22 @@ var direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	lifetime = max_lifetime
-	# Make sure the `body_entered` signal is connected to `_on_Area2D_body_entered`
-	# either in the editor or via code like:
-	# connect("body_entered", Callable(self, "_on_Area2D_body_entered"))
 
 func _physics_process(delta: float) -> void:
-	# Home in on the player if valid
+	# Determine the movement direction: toward the player if possible or fallback
+	var move_dir: Vector2
 	if is_instance_valid(player):
-		var dir = (player.global_position - global_position).normalized()
-		position += dir * speed * delta
+		move_dir = (player.global_position - global_position).normalized()
 	else:
-		# fallback movement
-		position += direction * speed * delta
+		move_dir = direction
 
-	# Self‑destruct after lifetime expires
+	# Move the arm
+	position += move_dir * speed * delta
+
+	# Smoothly rotate the arm toward the movement direction
+	rotation = lerp_angle(rotation, move_dir.angle(), 5 * delta)
+
+	# Decrement lifetime and remove the node once expired
 	lifetime -= delta
 	if lifetime <= 0.0:
 		queue_free()
@@ -31,5 +33,4 @@ func _physics_process(delta: float) -> void:
 func _on_Area2D_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		print("player hit")
-		#body.take_damage(20)
 		queue_free()
