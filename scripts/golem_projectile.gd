@@ -7,10 +7,17 @@ var lifetime: float
 var direction: Vector2 = Vector2.ZERO
 
 @onready var player: Node2D = get_node("/root/level1/player")
+const EXPLOSION_SCENE = preload("res://scenes/projectile_explosion.tscn")
+const LAUNCH_SCENE = preload("res://scenes/projectile_launch.tscn")
 
 func _ready() -> void:
 	lifetime = max_lifetime
 	connect("body_entered", Callable(self, "_on_Area2D_body_entered"))
+	
+	# Instantiate the launch animation effect
+	var launch_effect = LAUNCH_SCENE.instantiate()
+	launch_effect.global_position = global_position
+	get_tree().current_scene.add_child(launch_effect)
 
 func _physics_process(delta: float) -> void:
 	# Determine the movement direction: toward the player if possible or fallback
@@ -29,12 +36,20 @@ func _physics_process(delta: float) -> void:
 	# Decrement lifetime and remove the node once expired
 	lifetime -= delta
 	if lifetime <= 0.0:
+		# Instantiate the explosion and add it to the current scene
+		var explosion = EXPLOSION_SCENE.instantiate()
+		explosion.global_position = global_position
+		get_tree().current_scene.add_child(explosion)
 		queue_free()
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	
 	if body.is_in_group("player"):
 		print(" → player hit by projectile")
-		# want to add explosion here
+		
+		# Instantiate the explosion and add it to the current scene
+		var explosion = EXPLOSION_SCENE.instantiate()
+		explosion.global_position = global_position
+		get_tree().current_scene.add_child(explosion)
 		queue_free()
 		body.die()
