@@ -2,6 +2,7 @@ extends Area2D
 
 var picked_up: bool = false
 const BULLET = preload("res://scenes/simple_bullet.tscn")
+var player_ref: Node = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,6 +11,10 @@ func _ready() -> void:
 
 # Called every frame.
 func _process(delta: float) -> void:
+	
+	if player_ref == null or player_ref.is_dead:
+		return
+	
 	if picked_up:
 		# Compute the raw angle from the gun to the mouse.
 		var raw_angle: float = (get_global_mouse_position() - global_position).angle()
@@ -59,7 +64,7 @@ func _on_body_entered(body: Node) -> void:
 	
 	# Check if the colliding body is in the "Player" group.
 	if body.is_in_group("Player"):
-		
+		player_ref = body
 		# Call a method on the player to handle the pickup.
 		# Make sure your player script has a method named "pick_up_gun" (or similar).
 		body.pick_up_gun(self)

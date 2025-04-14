@@ -26,6 +26,7 @@ Music="*res://scenes/music.tscn"
 [global_group]
 
 enemies=""
+player=""
 
 [input]
 
