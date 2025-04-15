@@ -1,6 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://dd4pxg5kaoi3j"]
+[gd_scene load_steps=38 format=3 uid="uid://dd4pxg5kaoi3j"]
 
 [ext_resource type="Texture2D" uid="uid://tqb38dueriqv" path="res://assets/sprites/knight.png" id="1_yut83"]
+[ext_resource type="AudioStream" uid="uid://yawa0numnlu1" path="res://assets/sounds/jump.wav" id="2_uhdcy"]
+[ext_resource type="AudioStream" uid="uid://q1wejusl3h0y" path="res://assets/sounds/hurt.wav" id="3_357fi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6fnsr"]
 atlas = ExtResource("1_yut83")
@@ -285,3 +287,11 @@ position = Vector2(-6, -5)
 
 [node name="GunSocketRight" type="Node2D" parent="."]
 position = Vector2(5, -5)
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -12)
+stream = ExtResource("2_uhdcy")
+volume_db = -15.0
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_357fi")
