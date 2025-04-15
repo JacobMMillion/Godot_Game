@@ -4,6 +4,8 @@ var picked_up: bool = false
 var player_ref: Node = null
 
 @onready var muzzle: Node2D = $Muzzle
+@onready var shoot_sound: AudioStreamPlayer2D = $ShootSound
+
 const BULLET = preload("res://scenes/simple_bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -62,6 +64,9 @@ func _process(delta: float) -> void:
 			get_tree().root.add_child(bullet_instance)
 			bullet_instance.global_position = muzzle_pos
 			bullet_instance.rotation = rotation
+			
+			# Play shooting sound
+			shoot_sound.play()
 
 # Signal callback triggered when a body enters the Area2D.
 func _on_body_entered(body: Node) -> void:
