@@ -236,6 +236,7 @@ func _do_shoot_bullet() -> void:
 	if not is_dead:
 		get_tree().current_scene.add_child(b)
 
+# TODO: laser or summon?
 func _do_shoot_laser() -> void:
 	# your laser logic here
 	pass
