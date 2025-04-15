@@ -2,7 +2,7 @@ extends Node2D
 
 
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var player: Node2D = get_node("/root/level1/player")
+@onready var player = get_node("/root/level1/player")
 @onready var ray_cast_right: RayCast2D = $RayCastRight
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 

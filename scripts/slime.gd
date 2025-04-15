@@ -14,6 +14,8 @@ var current_health: int = 100
 
 func _ready() -> void:
 	add_to_group("enemies")
+	connect("body_entered", self._on_body_entered)
+	
 	health_bar.custom_minimum_size = Vector2(64, 6)
 	health_bar.min_value = 0
 	health_bar.max_value = MAX_HEALTH
@@ -38,6 +40,11 @@ func _process(delta: float) -> void:
 	var bar_w: float = health_bar.size.x
 	health_bar.position = screen_pos + Vector2(-bar_w * 0.5, -45)
 
+# KILL PLAYER ON CONTACT
+func _on_body_entered(body):
+	if body.name == "player":
+		body.die()
+		
 # Called when the enemy takes damage.
 func take_damage(amount: int) -> void:
 	current_health = max(current_health - amount, 0)

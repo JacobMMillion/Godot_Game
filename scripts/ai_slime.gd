@@ -13,6 +13,7 @@ const SPEED = 40
 
 func _ready():
 	add_to_group("enemies")
+	connect("body_entered", self._on_body_entered)
 
 	# ─── INITIALIZE HEALTH BAR ────────────────────────────────────────────
 	health_bar.custom_minimum_size = Vector2(64, 6)
@@ -42,7 +43,12 @@ func _process(delta: float) -> void:
 	health_bar.position     = screen_pos + Vector2(-bar_w * 0.5, -45)
 	# ────────────────────────────────────────────────────────────────────────
 
-# ─── ADD THESE FUNCTIONS AT THE BOTTOM ─────────────────────────────────
+# KILL PLAYER ON CONTACT
+func _on_body_entered(body):
+	if body.name == "player":
+		body.die()
+			
+# TAKING DAMAGE AND DEATH
 func take_damage(amount: int) -> void:
 	current_health = clamp(current_health - amount, 0, MAX_HEALTH)
 	health_bar.value = current_health

@@ -136,10 +136,13 @@ func die() -> void:
 	print("Player died!")
 	set_physics_process(false)
 
-	# Play death animation
 	animated_sprite.play("death")
-
-	# Wait for the animation to finish before restarting the scene
+	
+	# Capture the SceneTree reference now.
+	var tree = get_tree()
+	
+	# Wait for the death animation to finish.
 	await animated_sprite.animation_finished
-
-	get_tree().reload_current_scene()
+	
+	# Start over
+	tree.reload_current_scene()
