@@ -1,7 +1,9 @@
-[gd_scene load_steps=88 format=3 uid="uid://dp71cj4nasgx6"]
+[gd_scene load_steps=90 format=3 uid="uid://dp71cj4nasgx6"]
 
 [ext_resource type="Script" path="res://scripts/golem.gd" id="1_4wmbd"]
 [ext_resource type="Texture2D" uid="uid://gwvb3d0x2wfy" path="res://assets/sprites/stone_golem/PNG sheet/Character_sheet.png" id="1_e0kcm"]
+[ext_resource type="AudioStream" uid="uid://ccu28wdg0pr3s" path="res://assets/sounds/large_explosion.wav" id="3_12sd4"]
+[ext_resource type="AudioStream" uid="uid://hepugng7r3k0" path="res://assets/sounds/small_explosion.wav" id="4_vqkka"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6b4n"]
 size = Vector2(18.6391, 16.7582)
@@ -688,3 +690,10 @@ offset_right = 2.0
 offset_bottom = 28.0
 theme_override_styles/background = SubResource("StyleBoxFlat_c8brn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hi4kl")
+
+[node name="LargeExplosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_12sd4")
+volume_db = 12.0
+
+[node name="SmallExplosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_vqkka")

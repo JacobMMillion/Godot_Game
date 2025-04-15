@@ -9,6 +9,7 @@ var direction: Vector2 = Vector2.ZERO
 @onready var player: Node2D = get_node("/root/level1/player")
 const EXPLOSION_SCENE = preload("res://scenes/projectile_explosion.tscn")
 const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
+@onready var explosion_sound: AudioStreamPlayer2D = $LargeExplosion
 
 func _ready() -> void:
 	lifetime = max_lifetime
@@ -40,6 +41,15 @@ func _physics_process(delta: float) -> void:
 		var explosion = EXPLOSION_SCENE.instantiate()
 		explosion.global_position = global_position
 		get_tree().current_scene.add_child(explosion)
+		
+		# Detach the death sound from the enemy.
+		explosion_sound.get_parent().remove_child(explosion_sound)
+		get_tree().current_scene.add_child(explosion_sound)
+
+		# Play the death sound.
+		explosion_sound.pitch_scale = 0.5
+		explosion_sound.play()
+		
 		queue_free()
 
 func _on_Area2D_body_entered(body: Node) -> void:
@@ -51,5 +61,12 @@ func _on_Area2D_body_entered(body: Node) -> void:
 		var explosion = EXPLOSION_SCENE.instantiate()
 		explosion.global_position = global_position
 		get_tree().current_scene.add_child(explosion)
+		
+		# Detach the sound.
+		explosion_sound.get_parent().remove_child(explosion_sound)
+		get_tree().current_scene.add_child(explosion_sound)
+		explosion_sound.pitch_scale = 1.5
+		explosion_sound.play()
+		
 		queue_free()
 		body.die()

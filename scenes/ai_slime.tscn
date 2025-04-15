@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://demx3rfl2ini7"]
+[gd_scene load_steps=18 format=3 uid="uid://demx3rfl2ini7"]
 
 [ext_resource type="Script" path="res://scripts/ai_slime.gd" id="1_5j2r1"]
 [ext_resource type="Texture2D" uid="uid://da8os1suxlx7q" path="res://assets/sprites/slime_purple.png" id="2_dyi7j"]
+[ext_resource type="AudioStream" uid="uid://hepugng7r3k0" path="res://assets/sounds/small_explosion.wav" id="3_7h2aq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ntgwe"]
 atlas = ExtResource("2_dyi7j")
@@ -106,7 +107,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="slime" type="Area2D"]
+[node name="ai_slime" type="Area2D"]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_5j2r1")
@@ -135,3 +136,7 @@ offset_right = 4.0
 offset_bottom = 27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_6umrr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jp56e")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7h2aq")
+volume_db = -2.0

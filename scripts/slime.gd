@@ -7,6 +7,7 @@ extends Area2D
 @onready var health_bar: ProgressBar = $HealthBarLayer/HealthBar
 
 const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
+@onready var death_sound: AudioStreamPlayer2D = $DeathSound
 
 const SPEED = 60
 var direction = 1
@@ -57,11 +58,19 @@ func take_damage(amount: int) -> void:
 		call_deferred("update")  # redraw the health bar with the new value
 
 func die() -> void:
-	
-	# Explode
+	# Create and position the explosion
 	var explosion = SMALL_EXPLOSION_SCENE.instantiate()
 	explosion.global_position = global_position
 	explosion.scale = Vector2(1, 1)
 	get_tree().current_scene.add_child(explosion)
 	
+	# Detach the death sound from the enemy.
+	death_sound.get_parent().remove_child(death_sound)
+	get_tree().current_scene.add_child(death_sound)
+	
+	# Play the death sound.
+	death_sound.pitch_scale = 1.5
+	death_sound.play()
+	
+	# Now free the enemy node.
 	queue_free()
