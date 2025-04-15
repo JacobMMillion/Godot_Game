@@ -32,12 +32,14 @@ const PROJECTILE_SCENE = preload("res://scenes/golem_projectile.tscn")
 # explosions
 const EXPLOSION_SCENE = preload("res://scenes/projectile_explosion.tscn")
 const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
+@onready var explosion_sound: AudioStreamPlayer2D = $LargeExplosion
+@onready var small_explosion_sound: AudioStreamPlayer2D = $SmallExplosion
 
 var is_defending:    bool  = false
 var is_dead: 		 bool = false
 
-var current_health:  int   = 100
-const MAX_HEALTH     := 100
+var current_health:  int   = 300
+const MAX_HEALTH     := 300
 
 var actions = ["defend", "extend_arm", "prepare_laser"]
 const MIN_DELAY := 3.0
@@ -199,6 +201,18 @@ func spawn_explosions_while_dying() -> void:
 		launch_effect.scale = Vector2(0.5, 0.5)
 		launch_effect.global_position = launch_global_pos
 		get_tree().current_scene.add_child(launch_effect)
+		
+		# Play explosion sound
+		explosion_sound.get_parent().remove_child(explosion_sound)
+		get_tree().current_scene.add_child(explosion_sound)
+		explosion_sound.pitch_scale = 0.6
+		explosion_sound.play()
+		
+		# Play small explosion sound
+		small_explosion_sound.get_parent().remove_child(small_explosion_sound)
+		get_tree().current_scene.add_child(small_explosion_sound)
+		small_explosion_sound.pitch_scale = 1.0
+		small_explosion_sound.play()
 		
 		# Wait a short time before spawning the next set of effects.
 		await get_tree().create_timer(0.8).timeout

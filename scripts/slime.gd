@@ -6,6 +6,9 @@ extends Area2D
 
 @onready var health_bar: ProgressBar = $HealthBarLayer/HealthBar
 
+const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
+@onready var death_sound: AudioStreamPlayer2D = $DeathSound
+
 const SPEED = 60
 var direction = 1
 
@@ -14,6 +17,8 @@ var current_health: int = 100
 
 func _ready() -> void:
 	add_to_group("enemies")
+	connect("body_entered", self._on_body_entered)
+	
 	health_bar.custom_minimum_size = Vector2(64, 6)
 	health_bar.min_value = 0
 	health_bar.max_value = MAX_HEALTH
@@ -38,6 +43,11 @@ func _process(delta: float) -> void:
 	var bar_w: float = health_bar.size.x
 	health_bar.position = screen_pos + Vector2(-bar_w * 0.5, -45)
 
+# KILL PLAYER ON CONTACT
+func _on_body_entered(body):
+	if body.name == "player":
+		body.die()
+		
 # Called when the enemy takes damage.
 func take_damage(amount: int) -> void:
 	current_health = max(current_health - amount, 0)
@@ -48,4 +58,19 @@ func take_damage(amount: int) -> void:
 		call_deferred("update")  # redraw the health bar with the new value
 
 func die() -> void:
+	# Create and position the explosion
+	var explosion = SMALL_EXPLOSION_SCENE.instantiate()
+	explosion.global_position = global_position
+	explosion.scale = Vector2(1, 1)
+	get_tree().current_scene.add_child(explosion)
+	
+	# Detach the death sound from the enemy.
+	death_sound.get_parent().remove_child(death_sound)
+	get_tree().current_scene.add_child(death_sound)
+	
+	# Play the death sound.
+	death_sound.pitch_scale = 1.5
+	death_sound.play()
+	
+	# Now free the enemy node.
 	queue_free()

@@ -7,6 +7,9 @@ const GRAVITY = 980       # Define gravity constant
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+@onready var jump_sound: AudioStreamPlayer2D = $JumpSound
+@onready var hurt_sound: AudioStreamPlayer2D = $HurtSound
+
 # New variables for rolling
 var is_rolling: bool = false
 var roll_direction: float = 1.0
@@ -40,6 +43,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		jump_sound.play()
 		velocity.y = JUMP_VELOCITY
 	
 	# Handle roll.
@@ -136,10 +140,14 @@ func die() -> void:
 	print("Player died!")
 	set_physics_process(false)
 
-	# Play death animation
+	hurt_sound.play()
 	animated_sprite.play("death")
-
-	# Wait for the animation to finish before restarting the scene
+	
+	# Capture the SceneTree reference now.
+	var tree = get_tree()
+	
+	# Wait for the death animation to finish.
 	await animated_sprite.animation_finished
-
-	get_tree().reload_current_scene()
+	
+	# Start over
+	tree.reload_current_scene()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0peenktlwjg7"]
+[gd_scene load_steps=5 format=3 uid="uid://d0peenktlwjg7"]
 
 [ext_resource type="Script" path="res://scripts/simple_gun.gd" id="1_ckysk"]
 [ext_resource type="Texture2D" uid="uid://dl31wnluxslbk" path="res://assets/sprites/guns/Pack 1/2px/46.png" id="2_y00qo"]
+[ext_resource type="AudioStream" uid="uid://chsaqgle757cw" path="res://assets/sounds/blaster.mp3" id="3_otd1q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpm7r"]
 
@@ -19,3 +20,7 @@ shape = SubResource("RectangleShape2D_wpm7r")
 
 [node name="Muzzle" type="Node2D" parent="."]
 position = Vector2(5, 0)
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_otd1q")
+volume_db = -20.0
