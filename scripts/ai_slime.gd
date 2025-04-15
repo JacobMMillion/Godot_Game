@@ -11,6 +11,8 @@ var     current_health: int    = MAX_HEALTH
 
 const SPEED = 40
 
+const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
+
 func _ready():
 	add_to_group("enemies")
 	connect("body_entered", self._on_body_entered)
@@ -56,5 +58,12 @@ func take_damage(amount: int) -> void:
 		die()
 
 func die() -> void:
+	
+	# Explode
+	var explosion = SMALL_EXPLOSION_SCENE.instantiate()
+	explosion.global_position = global_position
+	explosion.scale = Vector2(1, 1)
+	get_tree().current_scene.add_child(explosion)
+	
 	queue_free()
 # ────────────────────────────────────────────────────────────────────────

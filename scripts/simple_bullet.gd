@@ -36,7 +36,6 @@ func _on_collision(other: Node) -> void:
 		# Instantiate the explosion effect at the bullet's current position.
 		var explosion = SMALL_EXPLOSION_SCENE.instantiate()
 		explosion.global_position = global_position
-		# Optionally scale it down
 		explosion.scale = Vector2(0.4, 0.4)
 		get_tree().current_scene.add_child(explosion)
 		
