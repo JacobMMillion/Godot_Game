@@ -29,6 +29,11 @@ const PROJECTILE_SCENE = preload("res://scenes/golem_projectile.tscn")
 @onready var muzzle_right: Node2D = $AnimatedSprite2D/ArmMuzzleR
 @onready var muzzle_left: Node2D = $AnimatedSprite2D/ArmMuzzleL
 
+# laser stuff
+const LASER_SCENE = preload("res://scenes/golem_laser.tscn")
+@onready var eye_right: Node2D = $AnimatedSprite2D/EyeMuzzleR
+@onready var eye_left: Node2D = $AnimatedSprite2D/EyeMuzzleL
+
 # explosions
 const EXPLOSION_SCENE = preload("res://scenes/projectile_explosion.tscn")
 const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
@@ -41,9 +46,10 @@ var is_dead: 		 bool = false
 var current_health:  int   = 300
 const MAX_HEALTH     := 300
 
-var actions = ["defend", "extend_arm", "prepare_laser"]
+#var actions = ["defend", "extend_arm", "prepare_laser"]
+var actions = ["prepare_laser"]
 const MIN_DELAY := 3.0
-const MAX_DELAY := 7.0
+const MAX_DELAY := 3.0
 
 # bob timer
 var bob_timer: float = 0.0
@@ -80,12 +86,12 @@ func _action_loop() -> void:
 		# Again, ensure that the enemy hasn't died during the wait.
 		if is_dead:
 			break
-
+			
 		var action = actions[randi() % actions.size()]
+		animated_sprite.play(action)
+
 		if action == "defend":
 			is_defending = true
-
-		animated_sprite.play(action)
 
 		if action == "extend_arm":
 			# Wait until we hit frame 8
@@ -100,6 +106,20 @@ func _action_loop() -> void:
 				break
 
 			_do_shoot_bullet()
+			
+		if action == "prepare_laser":
+			# Wait until we hit frame 8
+			while animated_sprite.frame != 13:
+				# Always check for death in the loop
+				if is_dead:
+					break
+				await animated_sprite.frame_changed
+			
+			# If died during the loop, break early.
+			if is_dead:
+				break
+
+			_do_shoot_laser()
 
 		# Wait for the rest of the animation to finish
 		await animated_sprite.animation_finished
@@ -112,8 +132,6 @@ func _action_loop() -> void:
 			"defend":
 				_do_defend()
 				is_defending = false
-			"prepare_laser":
-				_do_shoot_laser()
 
 		# (we already handled extend_arm)
 
@@ -236,7 +254,11 @@ func _do_shoot_bullet() -> void:
 	if not is_dead:
 		get_tree().current_scene.add_child(b)
 
-# TODO: laser or summon?
 func _do_shoot_laser() -> void:
-	# your laser logic here
-	pass
+	var l = LASER_SCENE.instantiate()
+	var muzzle = eye_left if animated_sprite.flip_h else eye_right
+	l.global_position = muzzle.global_position
+	l.direction = Vector2.LEFT  if animated_sprite.flip_h else Vector2.RIGHT
+	
+	if not is_dead:
+		get_tree().current_scene.add_child(l)

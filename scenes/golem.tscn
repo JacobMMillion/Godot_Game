@@ -591,6 +591,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b0ga5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m55y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0ga5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m55y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0ga5")
 }],
 "loop": false,
 "name": &"prepare_laser",
@@ -673,13 +685,20 @@ shape = SubResource("RectangleShape2D_y6b4n")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1.53846, 1.53846)
 sprite_frames = SubResource("SpriteFrames_qpp8p")
-animation = &"death"
+animation = &"prepare_laser"
+frame = 13
 
 [node name="ArmMuzzleR" type="Node2D" parent="AnimatedSprite2D"]
 position = Vector2(35.3846, -13.0769)
 
 [node name="ArmMuzzleL" type="Node2D" parent="AnimatedSprite2D"]
 position = Vector2(-38.4615, -13.0769)
+
+[node name="EyeMuzzleR" type="Node2D" parent="AnimatedSprite2D"]
+position = Vector2(0.769232, -55.3846)
+
+[node name="EyeMuzzleL" type="Node2D" parent="AnimatedSprite2D"]
+position = Vector2(-3.07692, -55.3846)
 
 [node name="HealthBarLayer" type="CanvasLayer" parent="."]
 
