@@ -3,6 +3,9 @@ extends Area2D
 var picked_up: bool = false
 var player_ref: Node = null
 
+# remember who we should ignore until they exit —
+@export var ignore_body: Node = null
+
 @onready var muzzle: Node2D = $Muzzle
 @onready var shoot_sound: AudioStreamPlayer2D = $ShootSound
 
@@ -12,6 +15,8 @@ const BULLET = preload("res://scenes/simple_bullet.tscn")
 func _ready() -> void:
 	# Connect the "body_entered" signal to detect the player colliding with the gun.
 	connect("body_entered", Callable(self, "_on_body_entered"))
+	
+	connect("body_exited",  Callable(self, "_on_body_exited"))
 
 # Called every frame.
 func _process(delta: float) -> void:
@@ -68,14 +73,24 @@ func _process(delta: float) -> void:
 			# Play shooting sound
 			shoot_sound.play()
 
-# Signal callback triggered when a body enters the Area2D.
 func _on_body_entered(body: Node) -> void:
-	
-	# Check if the colliding body is in the "Player" group.
+	# If this is the same body we just dropped, skip until they leave
+	if ignore_body != null and body == ignore_body:
+		return
+
+	# Check if the colliding body is in the "Player" group
 	if body.is_in_group("Player"):
 		player_ref = body
-		# Call a method on the player to handle the pickup.
-		# Make sure your player script has a method named "pick_up_gun" (or similar).
+
+		# Call a method on the player to handle the pickup
+		# Make sure your player script has a method named "pick_up_gun" (or similar)
 		body.pick_up_gun(self)
+
+		# Disable collision so it's not picked up again
 		set_collision_layer(0)
 		set_collision_mask(0)
+
+func _on_body_exited(body: Node) -> void:
+	# once the ignored body leaves, allow pickup again
+	if ignore_body != null and body == ignore_body:
+		ignore_body = null
