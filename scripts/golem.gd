@@ -46,8 +46,8 @@ var is_dead: 		 bool = false
 var current_health:  int   = 300
 const MAX_HEALTH     := 300
 
-#var actions = ["defend", "extend_arm", "prepare_laser"]
-var actions = ["prepare_laser"]
+var actions = ["defend", "extend_arm", "prepare_laser"]
+#var actions = ["prepare_laser"]
 const MIN_DELAY := 3.0
 const MAX_DELAY := 3.0
 
