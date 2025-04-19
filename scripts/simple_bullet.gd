@@ -29,7 +29,7 @@ func _on_collision(other: Node) -> void:
 	# Debug: See exactly what you hit
 	# print("Bullet collided with: ", other.name, " groups=", other.get_groups())
 	if other.is_in_group("enemies"):
-		print(" → hit an enemy!")
+		#print(" → hit an enemy!")
 		if other.has_method("take_damage"):
 			other.take_damage(damage)
 			

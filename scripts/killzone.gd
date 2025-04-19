@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var timer: Timer = $Timer
+@onready var player: CharacterBody2D = $"../player"
 
 func _on_body_entered(body: Node2D) -> void:
 	print("kill zone entered by: ", body.name)
@@ -22,10 +23,12 @@ func _on_body_entered(body: Node2D) -> void:
 			#return
 	
 	# Otherwise proceed with normal death sequence for the player
-	print("Player hit by slime - player dies")
 	Engine.time_scale = 0.5 # slow down
 	body.get_node("CollisionShape2D").queue_free() # remove player collision
+	player.die()
+	
 	timer.start()
+	
 
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1 # reset time scale
