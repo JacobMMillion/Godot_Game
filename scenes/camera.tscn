@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7dccdipugaup"]
+
+[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="1_mq53b"]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2(1, -11)
+zoom = Vector2(4, 4)
+limit_bottom = 700
+limit_smoothed = true
+position_smoothing_enabled = true
+script = ExtResource("1_mq53b")

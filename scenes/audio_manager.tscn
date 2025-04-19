@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://phb1lkh518lm"]
+
+[ext_resource type="Script" path="res://scenes/audio_manager.gd" id="1_abhhp"]
+[ext_resource type="AudioStream" uid="uid://7lo8fndsnyrt" path="res://assets/music/time_for_adventure.mp3" id="2_f521l"]
+[ext_resource type="AudioStream" uid="uid://cst4kugeeseax" path="res://assets/music/dark_fight_music_boss.mp3" id="3_qptjf"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_abhhp")
+
+[node name="WorldMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_f521l")
+volume_db = -10.0
+
+[node name="GolemFightMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qptjf")
