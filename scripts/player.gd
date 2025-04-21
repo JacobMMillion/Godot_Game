@@ -97,7 +97,10 @@ func is_player_rolling() -> bool:
 
 # Called by the gun when the player overlaps it.
 func pick_up_gun(gun: Node) -> void:
-	
+	# If we’re already holding something, swap it out
+	if equipped_gun:
+		drop_current_gun()
+		
 	gun.picked_up = true
 	
 	var socket_node: Node
@@ -109,16 +112,38 @@ func pick_up_gun(gun: Node) -> void:
 
 	# Remove the gun from its current parent (if any).
 	if gun.get_parent():
-		gun.get_parent().remove_child(gun)
+		gun.get_parent().call_deferred("remove_child", gun)
 
 	# Attach the gun to the chosen socket.
-	socket_node.add_child(gun)
+	socket_node.call_deferred("add_child", gun)
 	# Set the gun's local position to zero so that it sits at the socket's origin.
 	gun.position = Vector2.ZERO
 	gun.show()
 	
 	# Remember the equipped gun for continuous socket updating.
 	equipped_gun = gun
+
+func drop_current_gun() -> void:
+	if not equipped_gun:
+		return
+
+	var old_gun = equipped_gun
+
+	# Detach and put it back in the world
+	old_gun.get_parent().remove_child(old_gun)
+	get_tree().current_scene.add_child(old_gun)
+	old_gun.global_position = global_position + Vector2(0, -5)
+
+	# Reset its pickup state & collisions
+	old_gun.picked_up = false
+	# → user requested mask = 2
+	old_gun.set_collision_layer(2)
+	old_gun.set_collision_mask(2)
+
+	# NEW: make it ignore *you* until you walk out
+	old_gun.ignore_body = self
+
+	equipped_gun = null
 
 # Called every frame to check if the gun should be reparented.
 func update_gun_socket() -> void:
