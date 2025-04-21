@@ -5,6 +5,7 @@ extends Node2D
 func _ready():
 	timer.start()  
 	time_label.text = "Time: " + str(int(timer.wait_time))
+	#AudioManager.golem_fight_music.play()
 
 func _process(delta):
 	time_label.text = "Time: " + str(int(timer.time_left))

@@ -3,7 +3,8 @@ extends Area2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_cast_right:   RayCast2D        = $RayCastRight
 @onready var ray_cast_left:    RayCast2D        = $RayCastLeft
-@onready var player:           Node2D           = get_node("/root/level1/player")
+@onready var player:           Node2D           = null
+@onready var camera_2d:        Node2D           = null
 
 @onready var health_bar:       ProgressBar      = $HealthBarLayer/HealthBar
 const   MAX_HEALTH:    int     = 100
@@ -15,6 +16,9 @@ const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
 @onready var death_sound: AudioStreamPlayer2D = $DeathSound
 
 func _ready():
+	player = get_tree().current_scene.find_child("player")
+	camera_2d = player.get_node("Camera2D")
+	
 	add_to_group("enemies")
 	connect("body_entered", self._on_body_entered)
 
@@ -68,6 +72,9 @@ func die() -> void:
 	# Detach the death sound from the enemy.
 	death_sound.get_parent().remove_child(death_sound)
 	get_tree().current_scene.add_child(death_sound)
+	
+	# Apply camera shake (input = shake fade time, i.e. smaller = longer)
+	camera_2d.apply_shake(5.0)
 	
 	# Play the death sound.
 	death_sound.pitch_scale = 1.5

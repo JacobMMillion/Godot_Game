@@ -1,17 +1,19 @@
 extends Area2D
 
-@export var speed: float = 200.0
+@export var speed: float = 125.0
 @export var max_lifetime: float = 2.5
 
 var lifetime: float
 var direction: Vector2 = Vector2.ZERO
 
-@onready var player: Node2D = get_node("/root/level1/player")
+@onready var player: Node2D = null
 const EXPLOSION_SCENE = preload("res://scenes/projectile_explosion.tscn")
 const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
 @onready var explosion_sound: AudioStreamPlayer2D = $LargeExplosion
 
 func _ready() -> void:
+	player = get_tree().current_scene.find_child("player")
+	
 	lifetime = max_lifetime
 	connect("body_entered", Callable(self, "_on_Area2D_body_entered"))
 	

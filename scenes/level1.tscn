@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://d7wxstf2lfc5" path="res://assets/fonts/PixelOperator8.ttf" id="5_qogf0"]
 [ext_resource type="PackedScene" uid="uid://co4ru7g5ms0pr" path="res://scenes/killzone.tscn" id="6_frwan"]
 [ext_resource type="PackedScene" uid="uid://wgjxqck70vdh" path="res://scenes/slime.tscn" id="7_1ptde"]
+[ext_resource type="PackedScene" uid="uid://c7dccdipugaup" path="res://scenes/camera.tscn" id="7_iinop"]
 [ext_resource type="PackedScene" uid="uid://crb5y4dedy2ks" path="res://scenes/coin.tscn" id="10_cksh1"]
 [ext_resource type="PackedScene" uid="uid://demx3rfl2ini7" path="res://scenes/ai_slime.tscn" id="11_3teii"]
 [ext_resource type="Script" path="res://scripts/octopus.gd" id="12_gxty0"]
@@ -236,7 +237,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(869, -574), Vector2(869, -37)]
+"values": [Vector2(216, -430), Vector2(218, 41)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_28lxg"]
@@ -424,12 +425,7 @@ layer_1/tile_data = PackedInt32Array(327617, 327680, 0, 393153, 327680, 0, 45868
 position = Vector2(56, -568)
 script = ExtResource("2_4l7l3")
 
-[node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(1, -11)
-zoom = Vector2(4, 4)
-limit_bottom = 120
-limit_smoothed = true
-position_smoothing_enabled = true
+[node name="Camera2D" parent="player" instance=ExtResource("7_iinop")]
 
 [node name="killzone" parent="." instance=ExtResource("6_frwan")]
 position = Vector2(-2, 487)

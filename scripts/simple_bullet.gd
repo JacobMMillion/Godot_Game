@@ -30,6 +30,7 @@ func _process(delta: float) -> void:
 
 func _on_collision(other: Node) -> void:
 	if other.is_in_group("enemies"):
+		print(" → hit an enemy!")
 		if other.has_method("take_damage"):
 			other.take_damage(damage)
 		# explosion on impact

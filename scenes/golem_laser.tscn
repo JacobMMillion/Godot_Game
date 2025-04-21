@@ -1,0 +1,134 @@
+[gd_scene load_steps=18 format=3 uid="uid://50seepe4fmqi"]
+
+[ext_resource type="Texture2D" uid="uid://cu16tp23nalwm" path="res://assets/sprites/stone_golem/weapon PNG/Laser_sheet.png" id="1_8imoe"]
+[ext_resource type="Script" path="res://scripts/golem_laser.gd" id="1_inrpv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csbjs"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 100, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6rdm"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 200, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jpu3"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 300, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_earap"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 400, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guir6"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 500, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iiy43"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 600, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d66oe"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 700, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t5ck"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 800, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lti3b"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 900, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pd7u"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 1000, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d55fp"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 1100, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tw2c"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 1200, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2ffg"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 1300, 300, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scwdf"]
+atlas = ExtResource("1_8imoe")
+region = Rect2(0, 1400, 300, 65)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fmch4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csbjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6rdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jpu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_earap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guir6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iiy43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d66oe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t5ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lti3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pd7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d55fp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tw2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2ffg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scwdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2ffg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scwdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2ffg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scwdf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="GolemLaser" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_inrpv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_fmch4")
+autoplay = "default"
+frame = 13
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
