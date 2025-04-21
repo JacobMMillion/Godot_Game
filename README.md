@@ -1,6 +1,8 @@
 # Game Project
 
-**Developers:** Abenezer & Jacob
+**Developers:** Abenezer, Taimur, Asia, Jacob
+
+![Splash Photo](assets/splash_img.png)
 
 ## Prototype 3
 
