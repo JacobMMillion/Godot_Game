@@ -3,7 +3,7 @@ extends Area2D
 # — allow per‑instance tuning of speed & damage —
 @export var speed: float = 300
 @export var damage: int = 10
-@export var is_from_shotgun: bool = false
+
 var shooter: Node = null  # optional reference to player
 var velocity: Vector2 = Vector2.ZERO
 
@@ -38,11 +38,6 @@ func _on_collision(other: Node) -> void:
 		explosion.global_position = global_position
 		get_tree().current_scene.add_child(explosion)
 		queue_free()
-
-	if is_from_shotgun and shooter and shooter.is_in_group("Player"):
-		# Knock the player back (opposite of bullet velocity)
-		var knockback_force = -velocity.normalized() * 300  # tweak as needed
-		shooter.velocity += knockback_force
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

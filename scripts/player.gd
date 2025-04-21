@@ -112,10 +112,10 @@ func pick_up_gun(gun: Node) -> void:
 
 	# Remove the gun from its current parent (if any).
 	if gun.get_parent():
-		gun.get_parent().remove_child(gun)
+		gun.get_parent().call_deferred("remove_child", gun)
 
 	# Attach the gun to the chosen socket.
-	socket_node.add_child(gun)
+	socket_node.call_deferred("add_child", gun)
 	# Set the gun's local position to zero so that it sits at the socket's origin.
 	gun.position = Vector2.ZERO
 	gun.show()

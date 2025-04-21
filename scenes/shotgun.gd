@@ -12,22 +12,29 @@ var player_ref: Node = null
 #— bullet scene & parameters ——
 const BULLET = preload("res://scenes/simple_bullet.tscn")
 const NUM_PELLETS: int = 3
-const SPREAD_DEGREES: float = 15.0   # total cone angle
+const SPREAD_DEGREES: float = 10.0   # total cone angle
 const PELLET_SPEED: float = 800.0    # tweak as needed
-const PELLET_DAMAGE: int   = 3       # higher than simple gun
+const PELLET_DAMAGE: int   = 10       # higher than simple gun
 
-#— recoil strength for shotgun jump ——
-const RECOIL_FORCE: Vector2 = Vector2(-200, -300)
+@export var recoil_multiplier: float = 0.2    # fraction of bullet speed pushed back
+
+#— shoot–cooldown vars —
+@export var shoot_cooldown: float = 0.5  # seconds between shots
+var _time_until_next_shot: float = 0.0  # counts down in _process
+
 
 func _ready() -> void:
 	connect("body_entered", Callable(self, "_on_body_entered"))
 	connect("body_exited",  Callable(self, "_on_body_exited"))
 
 func _process(delta: float) -> void:
+	if _time_until_next_shot > 0.0:
+		_time_until_next_shot -= delta
+		
 	if not picked_up or player_ref == null or player_ref.is_dead:
 		return
 
-	# aim logic: reuse your SimpleGun code
+	
 	var raw_angle = (get_global_mouse_position() - global_position).angle()
 	var raw_deg = rad_to_deg(raw_angle)
 	if raw_deg >= 180: raw_deg -= 360
@@ -44,16 +51,16 @@ func _process(delta: float) -> void:
 	scale.y = -1 if (final_deg > 90 and final_deg < 270) else 1
 
 	# fire
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and _time_until_next_shot <= 0.0:
 		_shoot()
+		_time_until_next_shot = shoot_cooldown
 
 func _shoot() -> void:
-	# play SFX
 	shoot_sound.play()
+	var bullet_avg_velocity = Vector2.ZERO
 
 	# spawn pellets
 	for i in range(NUM_PELLETS):
-		# compute spread offset
 		var spread = SPREAD_DEGREES * ((i - (NUM_PELLETS - 1) / 2.0) / (NUM_PELLETS - 1))
 		var pellet_rot = rotation + deg_to_rad(spread)
 		var bullet = BULLET.instantiate()
@@ -61,16 +68,23 @@ func _shoot() -> void:
 		bullet.global_position = muzzle.global_position
 		bullet.rotation = pellet_rot
 
-		# configure bullet velocity & damage
+		# velocity & damage
+		var vel = Vector2(cos(pellet_rot), sin(pellet_rot)) * PELLET_SPEED
 		if bullet.has_method("set_velocity"):
-			bullet.set_velocity(Vector2(cos(pellet_rot), sin(pellet_rot)) * PELLET_SPEED)
+			bullet.set_velocity(vel)
 		else:
-			bullet.velocity = Vector2.RIGHT.rotated(pellet_rot) * PELLET_SPEED
+			bullet.velocity = vel
 		bullet.damage = PELLET_DAMAGE
 
-	# apply recoil to player for shotgun jumps
-	if player_ref and player_ref.is_on_floor():
-		player_ref.velocity += RECOIL_FORCE.rotated(rotation)
+		bullet_avg_velocity += vel
+
+	bullet_avg_velocity /= NUM_PELLETS
+
+	# apply improved recoil
+	if player_ref:
+		# push back opposite muzzle direction
+		var recoil = -bullet_avg_velocity * recoil_multiplier
+		player_ref.velocity += recoil
 
 # Signal callback triggered when a body enters the Area2D.
 func _on_body_entered(body: Node) -> void:
