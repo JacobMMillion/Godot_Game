@@ -43,13 +43,13 @@ const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
 var is_defending:    bool  = false
 var is_dead: 		 bool = false
 
-var current_health:  int   = 300
-const MAX_HEALTH     := 300
+var current_health:  int   = 1000
+const MAX_HEALTH     := 1000
 
-var actions = ["defend", "extend_arm", "prepare_laser"]
-#var actions = ["prepare_laser"]
+# "prepare_laser" removed
+var actions = ["defend", "extend_arm"]
 const MIN_DELAY := 3.0
-const MAX_DELAY := 3.0
+const MAX_DELAY := 5.0
 
 # bob timer
 var bob_timer: float = 0.0
@@ -237,7 +237,7 @@ func spawn_explosions_while_dying() -> void:
 
 # ─── Power‑move stubs ─────────────────────────────────────────────────────────
 func _do_defend() -> void:
-	var heal_amount = 350
+	var heal_amount = 200
 	current_health = min(current_health + heal_amount, MAX_HEALTH)
 	health_bar.value = current_health
 
