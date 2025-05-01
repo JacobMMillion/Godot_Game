@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cby86q6sl0dcl"]
+[gd_scene load_steps=19 format=4 uid="uid://dvr1p1net0a7c"]
 
 [ext_resource type="PackedScene" uid="uid://bgyknjarm1o23" path="res://scenes/platform.tscn" id="1_b5ia8"]
 [ext_resource type="PackedScene" uid="uid://dd4pxg5kaoi3j" path="res://scenes/player.tscn" id="1_c560q"]
@@ -379,7 +379,7 @@ position = Vector2(-105, -15)
 script = ExtResource("2_vww8j")
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(4, 4)
+zoom = Vector2(6, 6)
 script = ExtResource("4_xbv42")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]

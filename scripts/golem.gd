@@ -22,7 +22,7 @@ const WANDER_STIFFNESS_Y  := 0.5    # how strongly Y snaps to wander offset
 @onready var collision_shape:  CollisionShape2D = $CollisionShape2D
 
 # direct path to player node
-@onready var player: Node2D = get_node("/root/level1/player")
+@onready var player: Node2D = get_node("/root/Level_3/player")
 
 # projectile stuff
 const PROJECTILE_SCENE = preload("res://scenes/golem_projectile.tscn")

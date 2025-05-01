@@ -41,10 +41,11 @@ var is_defending:    bool  = false
 var is_dead: 		 bool = false
 var is_asleep:       bool = true
 
-var current_health:  int   = 400
-const MAX_HEALTH     := 400
+var current_health:  int   = 500
+const MAX_HEALTH     := 500
 
-var actions = ["defend", "extend_arm", "prepare_laser"]
+# var actions = ["defend", "extend_arm", "prepare_laser"]
+var actions = ["defend", "extend_arm"]
 const MIN_DELAY := 3.0
 const MAX_DELAY := 7.0
 
@@ -244,7 +245,7 @@ func spawn_explosions_while_dying() -> void:
 
 # ─── Power‑move stubs ─────────────────────────────────────────────────────────
 func _do_defend() -> void:
-	var heal_amount = 350
+	var heal_amount = 250
 	current_health = min(current_health + heal_amount, MAX_HEALTH)
 	health_bar.value = current_health
 
