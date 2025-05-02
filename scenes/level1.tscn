@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://deok630spq6n8"]
+[gd_scene load_steps=44 format=3 uid="uid://deok630spq6n8"]
 
 [ext_resource type="PackedScene" uid="uid://dd4pxg5kaoi3j" path="res://scenes/player.tscn" id="1_7otjh"]
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_8oh4p"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://d7wxstf2lfc5" path="res://assets/fonts/PixelOperator8.ttf" id="5_qogf0"]
 [ext_resource type="PackedScene" uid="uid://co4ru7g5ms0pr" path="res://scenes/killzone.tscn" id="6_frwan"]
 [ext_resource type="PackedScene" uid="uid://wgjxqck70vdh" path="res://scenes/slime.tscn" id="7_1ptde"]
+[ext_resource type="PackedScene" uid="uid://d3vhv70cpncol" path="res://scenes/speech_bubble.tscn" id="7_3yjq8"]
 [ext_resource type="PackedScene" uid="uid://c7dccdipugaup" path="res://scenes/camera.tscn" id="7_iinop"]
 [ext_resource type="PackedScene" uid="uid://crb5y4dedy2ks" path="res://scenes/coin.tscn" id="10_cksh1"]
 [ext_resource type="PackedScene" uid="uid://demx3rfl2ini7" path="res://scenes/ai_slime.tscn" id="11_3teii"]
@@ -384,6 +385,8 @@ layer_1/tile_data = PackedInt32Array(327617, 327680, 0, 393153, 327680, 0, 45868
 [node name="player" parent="." instance=ExtResource("1_7otjh")]
 position = Vector2(-447, -591)
 script = ExtResource("2_4l7l3")
+
+[node name="SpeechBubble" parent="player" instance=ExtResource("7_3yjq8")]
 
 [node name="Camera2D" parent="player" instance=ExtResource("7_iinop")]
 zoom = Vector2(6, 6)

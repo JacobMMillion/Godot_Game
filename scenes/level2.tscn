@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://pxgrb7msdbhb"]
+[gd_scene load_steps=30 format=3 uid="uid://pxgrb7msdbhb"]
 
 [ext_resource type="Script" path="res://scenes/level_2.gd" id="1_oai3m"]
 [ext_resource type="Script" path="res://scripts/gamemanager.gd" id="1_sm5xb"]
@@ -12,12 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://wgjxqck70vdh" path="res://scenes/slime.tscn" id="8_dv508"]
 [ext_resource type="PackedScene" uid="uid://crb5y4dedy2ks" path="res://scenes/coin.tscn" id="8_pvl7r"]
 [ext_resource type="PackedScene" uid="uid://c7dccdipugaup" path="res://scenes/camera.tscn" id="8_qmk1r"]
-[ext_resource type="FontFile" uid="uid://4f8wk8lv1a0s" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="10_5484f"]
 [ext_resource type="Script" path="res://scenes/trigger_area.gd" id="10_i7ud0"]
 [ext_resource type="PackedScene" uid="uid://ceqxf1i7b35g1" path="res://scenes/golem_level_2.tscn" id="10_l2f5d"]
 [ext_resource type="Script" path="res://scenes/golem_level_2.gd" id="11_ytfxr"]
 [ext_resource type="PackedScene" uid="uid://d0peenktlwjg7" path="res://scenes/simple_gun.tscn" id="13_u1ktb"]
+[ext_resource type="PackedScene" uid="uid://d3vhv70cpncol" path="res://scenes/speech_bubble.tscn" id="14_medmq"]
 [ext_resource type="PackedScene" uid="uid://demx3rfl2ini7" path="res://scenes/ai_slime.tscn" id="15_r4tdr"]
+[ext_resource type="PackedScene" uid="uid://cjqppim8o1ola" path="res://scenes/shotgun.tscn" id="19_m4hb3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dnomf"]
 texture = ExtResource("3_d5q7r")
@@ -743,7 +744,24 @@ size = Vector2(77.4111, 61.3039)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w5qyc"]
 size = Vector2(531, 247)
 
-[sub_resource type="Animation" id="Animation_guhe7"]
+[sub_resource type="Animation" id="Animation_y2d51"]
+resource_name = "move"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(215, 54), Vector2(215, -457)]
+}
+
+[sub_resource type="Animation" id="Animation_53wiu"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -755,30 +773,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(216, -430)]
+"values": [Vector2(212, 54)]
 }
 
-[sub_resource type="Animation" id="Animation_n6g0r"]
-resource_name = "move"
-length = 4.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 3.93333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(216, -430), Vector2(216, 58)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jxtrc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s8cd2"]
 _data = {
-"RESET": SubResource("Animation_guhe7"),
-"move": SubResource("Animation_n6g0r")
+"RESET": SubResource("Animation_53wiu"),
+"move": SubResource("Animation_y2d51")
 }
 
 [node name="level2" type="Node2D"]
@@ -810,11 +811,13 @@ layer_1/tile_data = PackedInt32Array(-655467, 589824, 2, -655466, 655360, 2, -65
 [node name="TileMapIndoors" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_gsrfl")
 format = 2
-layer_0/tile_data = PackedInt32Array(-917473, 786432, 10, -851937, 786432, 10, -786401, 786432, 10, -720865, 786432, 10, -589793, 786432, 10, -655329, 786432, 10, -524257, 786432, 10, -458721, 786432, 10, -393185, 786432, 10, -327649, 786432, 10, -262113, 786432, 10, -196577, 786432, 10, -131041, 786432, 10, -65505, 786432, 10, 31, 786432, 10, 65567, 851968, 10, -917469, 786432, 10, -851933, 786432, 10, -786397, 786432, 10, -720861, 786432, 10, -655325, 786432, 10, -589789, 786432, 10, -524253, 786432, 10, -458717, 786432, 10, -393181, 786432, 10, -327645, 786432, 10, -262109, 786432, 10, -196573, 786432, 10, -131037, 786432, 10, -65501, 786432, 10, 35, 786432, 10, 65571, 786432, 11, -917454, 786432, 10, -851918, 786432, 10, -786382, 786432, 10, -720846, 786432, 10, -655310, 786432, 10, -589774, 786432, 10, -524238, 786432, 10, -458702, 786432, 10, -393166, 786432, 10, -327630, 786432, 10, -262094, 786432, 10, -196558, 786432, 10, -131022, 786432, 10, -65486, 786432, 10, 50, 786432, 10, 65586, 851968, 10, -917457, 786432, 10, -851921, 786432, 10, -786385, 786432, 10, -720849, 786432, 10, -655313, 786432, 10, -589777, 786432, 10, -524241, 786432, 10, -458705, 786432, 10, -393169, 786432, 10, -327633, 786432, 10, -262097, 786432, 10, -196561, 786432, 10, -131025, 786432, 10, -65489, 786432, 10, 47, 786432, 10, 65583, 786432, 11, 28, 1114112, 7, 33, 1114112, 7, 53, 1114112, 7, -65509, 1376256, 2, -327652, 1376256, 2, -589795, 1376256, 2, -786402, 1376256, 2, -65481, 1441792, 2, -327626, 1441792, 2, -589771, 1441792, 2, -851917, 1441792, 2, 49, 1114112, 6, 65595, 1114112, 12, 65576, 1048576, 14, 65577, 1114112, 14, 65581, 1179648, 14, 65578, 1114112, 14, 65579, 1114112, 14, 65580, 1114112, 14, -131032, 1310720, 15, -65496, 1310720, 16, -131027, 1376256, 15, -65491, 1376256, 16, -983009, 786432, 10, -1048545, 786432, 10, -983005, 786432, 10, -1048541, 786432, 10, -1048529, 786432, 10, -982993, 786432, 10, -1048526, 786432, 10, -982990, 786432, 10, 131065, 1048576, 16, 131066, 1114112, 16, 131067, 1114112, 16, 131068, 1114112, 16, 131069, 1114112, 16, 131070, 1114112, 16, 131071, 1114112, 16, 65536, 1114112, 16, 65537, 1114112, 16, 65538, 1114112, 16, 65539, 1114112, 16, 65540, 1114112, 16, 65541, 1179648, 16, 65542, 1179648, 6, 131064, 1179648, 6, -65525, 1310720, 7, -851957, 1310720, 7, -1507317, 1310720, 7, -1507313, 1310720, 6, -851953, 1310720, 6, -65521, 1310720, 6, -1769462, 1245184, 5, -1834998, 1245184, 4, -1900534, 1245184, 4, -1834992, 1245184, 4, -1900528, 1245184, 4, -1769456, 1245184, 5, -1966070, 1245184, 3, -1966064, 1245184, 3, -1703941, 327680, 5, -1703953, 327680, 5, -1769434, 327680, 5, -1769424, 196608, 6, -1769450, 262144, 7, -1769449, 327680, 7, -1769447, 327680, 7, -1769448, 327680, 7, -1769446, 458752, 7, -1769435, 131072, 4, -1769433, 196608, 4, -2097139, 1048576, 4, -2097140, 1048576, 4, -2031621, 1048576, 4, -2097119, 1048576, 4, -2097104, 1048576, 4, -1900494, 1310720, 6, -1900562, 1310720, 7, -1703950, 1048576, 2, -1703949, 1114112, 2, -1703948, 1114112, 2, -1703947, 1179648, 2, -1769428, 1179648, 2, -1769429, 1048576, 2, -1900510, 1114112, 7, -1900517, 1114112, 7, -1900537, 1114112, 7, -1835010, 1114112, 7, -1835020, 1114112, 7, -1966094, 1310720, 13, -1966093, 1376256, 13, -2031612, 1376256, 13, -2031593, 1376256, 13, -2031575, 1376256, 13, -2031576, 1310720, 13, -2031594, 1310720, 13, -2031613, 1310720, 13, 65593, 1441792, 10, -327647, 1114112, 7, -655327, 1114112, 7, -262091, 1114112, 7, -524235, 1114112, 7, -327640, 1114112, 7, -327635, 1114112, 7, -655320, 1114112, 7, -655315, 1114112, 7, -983000, 1114112, 7, -982995, 1114112, 7, -1048543, 1114112, 7)
+layer_0/tile_data = PackedInt32Array(-917473, 786432, 10, -851937, 786432, 10, -786401, 786432, 10, -720865, 786432, 10, -589793, 786432, 10, -655329, 786432, 10, -524257, 786432, 10, -458721, 786432, 10, -393185, 786432, 10, -327649, 786432, 10, -262113, 786432, 10, -196577, 786432, 10, -131041, 786432, 10, -65505, 786432, 10, 31, 786432, 10, 65567, 851968, 10, -917469, 786432, 10, -851933, 786432, 10, -786397, 786432, 10, -720861, 786432, 10, -655325, 786432, 10, -589789, 786432, 10, -524253, 786432, 10, -458717, 786432, 10, -393181, 786432, 10, -327645, 786432, 10, -262109, 786432, 10, -196573, 786432, 10, -131037, 786432, 10, -65501, 786432, 10, 35, 786432, 10, 65571, 786432, 11, -917454, 786432, 10, -851918, 786432, 10, -786382, 786432, 10, -720846, 786432, 10, -655310, 786432, 10, -589774, 786432, 10, -524238, 786432, 10, -458702, 786432, 10, -393166, 786432, 10, -327630, 786432, 10, -262094, 786432, 10, -196558, 786432, 10, -131022, 786432, 10, -65486, 786432, 10, 50, 786432, 10, 65586, 851968, 10, -917457, 786432, 10, -851921, 786432, 10, -786385, 786432, 10, -720849, 786432, 10, -655313, 786432, 10, -589777, 786432, 10, -524241, 786432, 10, -458705, 786432, 10, -393169, 786432, 10, -327633, 786432, 10, -262097, 786432, 10, -196561, 786432, 10, -131025, 786432, 10, -65489, 786432, 10, 47, 786432, 10, 65583, 786432, 11, 28, 1114112, 7, 33, 1114112, 7, 53, 1114112, 7, -65509, 1376256, 2, -327652, 1376256, 2, -589795, 1376256, 2, -786402, 1376256, 2, -65481, 1441792, 2, -327626, 1441792, 2, -589771, 1441792, 2, -851917, 1441792, 2, 49, 1114112, 6, 65595, 1114112, 12, 65576, 1048576, 14, 65577, 1114112, 14, 65581, 1179648, 14, 65578, 1114112, 14, 65579, 1114112, 14, 65580, 1114112, 14, -131032, 1310720, 15, -65496, 1310720, 16, -131027, 1376256, 15, -65491, 1376256, 16, -983009, 786432, 10, -1048545, 786432, 10, -983005, 786432, 10, -1048541, 786432, 10, -1048529, 786432, 10, -982993, 786432, 10, -1048526, 786432, 10, -982990, 786432, 10, 65542, 1179648, 6, 131064, 1179648, 6, -65525, 1310720, 7, -851957, 1310720, 7, -1507317, 1310720, 7, -1507313, 1310720, 6, -851953, 1310720, 6, -65521, 1310720, 6, -1769462, 1245184, 5, -1834998, 1245184, 4, -1900534, 1245184, 4, -1834992, 1245184, 4, -1900528, 1245184, 4, -1769456, 1245184, 5, -1966070, 1245184, 3, -1966064, 1245184, 3, -1703941, 327680, 5, -1703953, 327680, 5, -1769434, 327680, 5, -1769424, 196608, 6, -1769450, 262144, 7, -1769449, 327680, 7, -1769447, 327680, 7, -1769448, 327680, 7, -1769446, 458752, 7, -1769435, 131072, 4, -1769433, 196608, 4, -2097139, 1048576, 4, -2097140, 1048576, 4, -2031621, 1048576, 4, -2097119, 1048576, 4, -2097104, 1048576, 4, -1900494, 1310720, 6, -1900562, 1310720, 7, -1703950, 1048576, 2, -1703949, 1114112, 2, -1703948, 1114112, 2, -1703947, 1179648, 2, -1769428, 1179648, 2, -1769429, 1048576, 2, -1900510, 1114112, 7, -1900517, 1114112, 7, -1900537, 1114112, 7, -1835010, 1114112, 7, -1835020, 1114112, 7, -1966094, 1310720, 13, -1966093, 1376256, 13, -2031612, 1376256, 13, -2031593, 1376256, 13, -2031575, 1376256, 13, -2031576, 1310720, 13, -2031594, 1310720, 13, -2031613, 1310720, 13, 65593, 1441792, 10, -327647, 1114112, 7, -655327, 1114112, 7, -262091, 1114112, 7, -524235, 1114112, 7, -327640, 1114112, 7, -327635, 1114112, 7, -655320, 1114112, 7, -655315, 1114112, 7, -983000, 1114112, 7, -982995, 1114112, 7, -1048543, 1114112, 7)
 
 [node name="player" parent="." instance=ExtResource("4_2v673")]
 position = Vector2(-32, 26)
 script = ExtResource("5_1booh")
+
+[node name="SpeechBubble" parent="player" instance=ExtResource("14_medmq")]
 
 [node name="Camera2D" parent="player" instance=ExtResource("8_qmk1r")]
 zoom = Vector2(6, 6)
@@ -828,18 +831,6 @@ shape = SubResource("WorldBoundaryShape2D_ijtds")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 75.0
 autostart = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="TimerLabel2" type="Label" parent="CanvasLayer"]
-offset_left = 11.0
-offset_top = 9.0
-offset_right = 51.0
-offset_bottom = 32.0
-theme_override_fonts/font = ExtResource("10_5484f")
-theme_override_font_sizes/font_size = 22
-metadata/_edit_use_anchors_ = true
 
 [node name="TriggerArea" type="Area2D" parent="."]
 position = Vector2(927, 40)
@@ -876,15 +867,6 @@ shape = SubResource("RectangleShape2D_w5qyc")
 
 [node name="SimpleGun" parent="." instance=ExtResource("13_u1ktb")]
 position = Vector2(-280, -431)
-
-[node name="platform" parent="." instance=ExtResource("7_agwcl")]
-position = Vector2(216, -430)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="platform"]
-libraries = {
-"": SubResource("AnimationLibrary_jxtrc")
-}
-autoplay = "move"
 
 [node name="Slimes" type="Node" parent="."]
 
@@ -968,21 +950,6 @@ position = Vector2(403, -448)
 [node name="coin12" parent="Coins" instance=ExtResource("8_pvl7r")]
 position = Vector2(661, -446)
 
-[node name="coin13" parent="Coins" instance=ExtResource("8_pvl7r")]
-position = Vector2(800, -427)
-
-[node name="coin14" parent="Coins" instance=ExtResource("8_pvl7r")]
-position = Vector2(812, -427)
-
-[node name="Label" type="Label" parent="."]
-offset_left = 268.0
-offset_top = 16.0
-offset_right = 387.0
-offset_bottom = 39.0
-theme_override_fonts/font = ExtResource("2_ltamc")
-theme_override_font_sizes/font_size = 8
-text = "<They took my gun!>"
-
 [node name="Level3_Button" type="Button" parent="."]
 offset_left = 920.0
 offset_top = 51.0
@@ -990,6 +957,18 @@ offset_right = 1010.0
 offset_bottom = 82.0
 scale = Vector2(0.5, 0.5)
 text = "Next Level"
+
+[node name="Shotgun" parent="." instance=ExtResource("19_m4hb3")]
+position = Vector2(806, -429)
+
+[node name="platform" parent="." instance=ExtResource("7_agwcl")]
+position = Vector2(212, 54)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="platform"]
+libraries = {
+"": SubResource("AnimationLibrary_s8cd2")
+}
+autoplay = "move"
 
 [connection signal="body_entered" from="TriggerArea" to="TriggerArea" method="_on_body_entered"]
 [connection signal="body_exited" from="TriggerArea" to="TriggerArea" method="_on_body_exited"]
