@@ -19,9 +19,14 @@ const ROLL_DURATION: float = 0.5  # Roll lasts 0.5 seconds
 # Reference to the currently equipped gun, if any.
 var equipped_gun: Node = null
 
+@onready var speech_bubble: Label = $SpeechBubble
+
 # Death
 var is_dead = false
 
+func _ready():
+	speech_bubble.visible = false
+	
 func _physics_process(delta: float) -> void:
 	# Handle roll timer.
 	if is_rolling:
@@ -176,3 +181,10 @@ func die() -> void:
 	
 	# Start over
 	tree.reload_current_scene()
+	
+	
+func speak(speech: String, duration: float):
+	speech_bubble.text = speech
+	speech_bubble.visible = true
+	await get_tree().create_timer(duration).timeout
+	speech_bubble.visible = false
