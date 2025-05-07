@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://pxgrb7msdbhb"]
+[gd_scene load_steps=30 format=3 uid="uid://pxgrb7msdbhb"]
 
 [ext_resource type="Script" path="res://scenes/level_2.gd" id="1_oai3m"]
 [ext_resource type="Script" path="res://scripts/gamemanager.gd" id="1_sm5xb"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://ceqxf1i7b35g1" path="res://scenes/golem_level_2.tscn" id="10_l2f5d"]
 [ext_resource type="FontFile" uid="uid://4f8wk8lv1a0s" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="11_4l8vr"]
 [ext_resource type="Script" path="res://scenes/golem_level_2.gd" id="11_ytfxr"]
-[ext_resource type="PackedScene" uid="uid://d0peenktlwjg7" path="res://scenes/simple_gun.tscn" id="13_u1ktb"]
 [ext_resource type="PackedScene" uid="uid://d3vhv70cpncol" path="res://scenes/speech_bubble.tscn" id="14_medmq"]
 [ext_resource type="PackedScene" uid="uid://demx3rfl2ini7" path="res://scenes/ai_slime.tscn" id="15_r4tdr"]
 [ext_resource type="PackedScene" uid="uid://cjqppim8o1ola" path="res://scenes/shotgun.tscn" id="19_m4hb3"]
@@ -821,7 +820,6 @@ script = ExtResource("5_1booh")
 [node name="SpeechBubble" parent="player" instance=ExtResource("14_medmq")]
 
 [node name="Camera2D" parent="player" instance=ExtResource("8_qmk1r")]
-zoom = Vector2(6, 6)
 
 [node name="killzone" parent="." instance=ExtResource("6_r3qnj")]
 position = Vector2(614, 87)
@@ -897,9 +895,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Golem_Cont/WakeupZone"]
 position = Vector2(699, -34)
 shape = SubResource("RectangleShape2D_w5qyc")
-
-[node name="SimpleGun" parent="." instance=ExtResource("13_u1ktb")]
-position = Vector2(-280, -431)
 
 [node name="Slimes" type="Node" parent="."]
 
@@ -1004,6 +999,9 @@ libraries = {
 autoplay = "move"
 
 [node name="Score" type="Node" parent="."]
+
+[node name="Shotgun2" parent="." instance=ExtResource("19_m4hb3")]
+position = Vector2(-281, -426)
 
 [connection signal="body_entered" from="TriggerArea" to="TriggerArea" method="_on_body_entered"]
 [connection signal="body_exited" from="TriggerArea" to="TriggerArea" method="_on_body_exited"]
