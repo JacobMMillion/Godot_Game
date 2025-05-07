@@ -833,10 +833,10 @@ shape = SubResource("WorldBoundaryShape2D_ijtds")
 layer = 0
 
 [node name="TimerLabel" type="Label" parent="CanvasLayer"]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 219.0
-offset_bottom = 39.0
+offset_left = 32.0
+offset_top = 53.0
+offset_right = 280.0
+offset_bottom = 76.0
 theme_override_colors/font_color = Color(0.988957, 0.988957, 0.988957, 1)
 theme_override_colors/font_outline_color = Color(0.238559, 0.438892, 0.642115, 1)
 theme_override_constants/shadow_offset_x = 14
@@ -847,8 +847,22 @@ theme_override_fonts/font = ExtResource("11_4l8vr")
 theme_override_font_sizes/font_size = 22
 text = "HI MY NAME IS"
 
+[node name="LootCount" type="Label" parent="CanvasLayer"]
+offset_left = 758.0
+offset_top = 56.0
+offset_right = 984.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(72.043, 60.215, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.766856, 0.253251, 1)
+theme_override_colors/font_outline_color = Color(0.31443, 0.417581, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 45
+theme_override_fonts/font = ExtResource("11_4l8vr")
+theme_override_font_sizes/font_size = 22
+text = "LOOT COUNT:"
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 75.0
+wait_time = 150.0
 autostart = true
 
 [node name="TriggerArea" type="Area2D" parent="."]
@@ -988,6 +1002,8 @@ libraries = {
 "": SubResource("AnimationLibrary_s8cd2")
 }
 autoplay = "move"
+
+[node name="Score" type="Node" parent="."]
 
 [connection signal="body_entered" from="TriggerArea" to="TriggerArea" method="_on_body_entered"]
 [connection signal="body_exited" from="TriggerArea" to="TriggerArea" method="_on_body_exited"]

@@ -2,12 +2,16 @@ extends Node2D
 @onready var timer = $Timer
 @onready var time_label = $CanvasLayer/TimerLabel
 @onready var player: CharacterBody2D = $player
+@onready var GameManager = %GameManager
+
 
 func _on_level_2_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/level2.tscn")
 
 func _ready():
-	print_tree() 
+	GameManager.loot_label = $CanvasLayer/LootCount
+	GameManager.score_label = $ScoreLabel
+	GameManager.update_money_display()
 	time_label.add_theme_color_override("font_color", Color.WHITE)
 	timer.timeout.connect(_on_Timer_timeout)
 	timer.start()  

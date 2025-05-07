@@ -1,15 +1,21 @@
 extends Node
 
-@onready var score_label: Label = $ScoreLabel
-@onready var loot: Label = get_node("/root/level1/CanvasLayer/LootCount")
+var loot_label: Label = null
+var score_label: Label = null
 
-
-var money = 0
 
 func _ready():
 	pass
 	
 func add_money():
-	money += 1
-	loot.text  = "Loot: " + str(money)
-	score_label.text = "Coins: " + str(money)
+	Global.score += 1
+	if loot_label:
+		loot_label.text = "Loot Count: " + str(Global.score)
+	if score_label:
+		score_label.text = "Coins: " + str(Global.score)
+		
+func update_money_display():
+	if loot_label:
+		loot_label.text = "Loot Count: " + str(Global.score)
+	if score_label:
+		score_label.text = "Coins: " + str(Global.score)
