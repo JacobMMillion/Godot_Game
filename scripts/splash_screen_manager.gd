@@ -4,9 +4,9 @@ var splash_screen : TextureRect
 var load_scene    : PackedScene = preload("res://scenes/level1.tscn")
 
 @export var in_time        : float = 0.5
-@export var fade_in_time   : float = 1.5
-@export var pause_time     : float = 1.5
-@export var fade_out_time  : float = 1.5
+@export var fade_in_time   : float = 3.0
+@export var pause_time     : float = 4.0
+@export var fade_out_time  : float = 3.0
 @export var out_time       : float = 0.5
 
 # Called when the node enters the scene tree for the first time.
