@@ -372,6 +372,37 @@ theme_override_fonts/font = ExtResource("5_qogf0")
 theme_override_font_sizes/font_size = 8
 text = "Money: "
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 23.0
+offset_top = 19.0
+offset_right = 271.0
+offset_bottom = 63.0
+theme_override_colors/font_shadow_color = Color(0.539838, 0.314777, 0.29319, 1)
+theme_override_colors/font_outline_color = Color(0.592678, 0.437994, 0.27996, 1)
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 45
+theme_override_fonts/font = ExtResource("16_5j0pu")
+theme_override_font_sizes/font_size = 22
+text = "HI MY NAME IS"
+horizontal_alignment = 1
+
+[node name="LootCount" type="Label" parent="CanvasLayer"]
+offset_left = 681.0
+offset_top = 19.0
+offset_right = 885.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.873446, 0.692713, 0.262467, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.47451, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.204668, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 40
+theme_override_fonts/font = ExtResource("5_qogf0")
+theme_override_font_sizes/font_size = 22
+text = "Loot Count: "
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
 scale = Vector2(1.00761, 1.04398)
@@ -389,7 +420,7 @@ script = ExtResource("2_4l7l3")
 [node name="SpeechBubble" parent="player" instance=ExtResource("7_3yjq8")]
 
 [node name="Camera2D" parent="player" instance=ExtResource("7_iinop")]
-zoom = Vector2(6, 6)
+zoom = Vector2(3, 3)
 
 [node name="killzone" parent="." instance=ExtResource("6_frwan")]
 position = Vector2(-2, 487)
@@ -467,21 +498,8 @@ position = Vector2(87, 8)
 shape = SubResource("SegmentShape2D_8ujt1")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 120.0
 autostart = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="TimerLabel" type="Label" parent="CanvasLayer"]
-offset_left = 23.0
-offset_top = 19.0
-offset_right = 271.0
-offset_bottom = 63.0
-theme_override_fonts/font = ExtResource("16_5j0pu")
-theme_override_font_sizes/font_size = 22
-text = "HI MY NAME IS"
-horizontal_alignment = 1
 
 [node name="slime2" parent="." instance=ExtResource("11_3teii")]
 position = Vector2(394, -579)

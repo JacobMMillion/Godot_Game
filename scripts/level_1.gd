@@ -7,6 +7,7 @@ func _on_level_2_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/level2.tscn")
 
 func _ready():
+	print_tree() 
 	time_label.add_theme_color_override("font_color", Color.WHITE)
 	timer.timeout.connect(_on_Timer_timeout)
 	timer.start()  
