@@ -372,6 +372,37 @@ theme_override_fonts/font = ExtResource("5_qogf0")
 theme_override_font_sizes/font_size = 8
 text = "Money: "
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 23.0
+offset_top = 19.0
+offset_right = 271.0
+offset_bottom = 63.0
+theme_override_colors/font_shadow_color = Color(0.539838, 0.314777, 0.29319, 1)
+theme_override_colors/font_outline_color = Color(0.592678, 0.437994, 0.27996, 1)
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 45
+theme_override_fonts/font = ExtResource("16_5j0pu")
+theme_override_font_sizes/font_size = 22
+text = "HI MY NAME IS"
+horizontal_alignment = 1
+
+[node name="LootCount" type="Label" parent="CanvasLayer"]
+offset_left = 721.0
+offset_top = 19.0
+offset_right = 925.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.873446, 0.692713, 0.262467, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.47451, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.204668, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 40
+theme_override_fonts/font = ExtResource("5_qogf0")
+theme_override_font_sizes/font_size = 22
+text = "Loot Count: "
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
 scale = Vector2(1.00761, 1.04398)
@@ -389,7 +420,7 @@ script = ExtResource("2_4l7l3")
 [node name="SpeechBubble" parent="player" instance=ExtResource("7_3yjq8")]
 
 [node name="Camera2D" parent="player" instance=ExtResource("7_iinop")]
-zoom = Vector2(6, 6)
+zoom = Vector2(3, 3)
 
 [node name="killzone" parent="." instance=ExtResource("6_frwan")]
 position = Vector2(-2, 487)
@@ -401,28 +432,232 @@ shape = SubResource("WorldBoundaryShape2D_05d7b")
 
 [node name="Coins" type="Node" parent="."]
 
+[node name="coin6" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(201, -602)
+
+[node name="coin7" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(120, 5)
+
+[node name="coin10" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(283, -44)
+
+[node name="coin11" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(526, -43)
+
+[node name="coin12" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(603, -43)
+
+[node name="coin13" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(676, -44)
+
+[node name="coin14" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(863, -44)
+
+[node name="coin15" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(923, -45)
+
+[node name="coin16" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1012, -44)
+
+[node name="coin17" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1050, -45)
+
+[node name="coin18" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1129, -45)
+
+[node name="coin19" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1195, -45)
+
+[node name="coin20" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1255, -46)
+
+[node name="coin21" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1568, -61)
+
+[node name="coin22" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1588, -80)
+
+[node name="coin23" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1606, -99)
+
+[node name="coin24" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1622, -115)
+
+[node name="coin25" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1638, -131)
+
+[node name="coin26" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1590, -176)
+
+[node name="coin27" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1561, -191)
+
+[node name="coin28" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1509, -243)
+
+[node name="coin29" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1477, -276)
+
+[node name="coin30" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1444, -308)
+
+[node name="coin31" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1411, -344)
+
+[node name="coin32" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1365, -379)
+
+[node name="coin33" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1444, -409)
+
+[node name="coin34" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1473, -428)
+
+[node name="coin35" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1488, -460)
+
+[node name="coin36" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1538, -493)
+
+[node name="coin37" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1583, -525)
+
+[node name="coin38" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1498, -577)
+
+[node name="coin39" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1447, -578)
+
+[node name="coin40" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1365, -577)
+
+[node name="coin41" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1292, -576)
+
+[node name="coin42" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1144, -578)
+
+[node name="coin43" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1089, -578)
+
+[node name="coin44" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(1003, -614)
+
+[node name="coin45" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(978, -614)
+
+[node name="coin46" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(952, -615)
+
+[node name="coin47" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(824, -632)
+
+[node name="coin48" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(646, -578)
+
+[node name="coin49" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(495, -577)
+
+[node name="coin50" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(427, -579)
+
+[node name="coin51" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(328, -578)
+
+[node name="coin52" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(297, -578)
+
+[node name="coin53" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(266, -578)
+
+[node name="coin54" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(232, -579)
+
+[node name="coin55" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(202, -579)
+
+[node name="coin56" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(202, -626)
+
+[node name="coin57" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(202, -652)
+
+[node name="coin58" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(93, -580)
+
+[node name="coin59" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(54, -581)
+
+[node name="coin60" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-87, -582)
+
+[node name="coin61" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-55, -582)
+
+[node name="coin62" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-202, -579)
+
+[node name="coin63" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-240, -579)
+
+[node name="coin64" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-312, -579)
+
+[node name="coin65" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-352, -581)
+
+[node name="coin67" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-427, -581)
+
+[node name="coin68" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-466, -580)
+
+[node name="coin69" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-506, -580)
+
+[node name="coin70" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-550, -581)
+
+[node name="coin71" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-583, -579)
+
+[node name="coin72" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-667, -579)
+
+[node name="coin73" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-714, -577)
+
+[node name="coin74" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-746, -577)
+
+[node name="coin75" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-780, -578)
+
+[node name="coin76" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-838, -577)
+
+[node name="coin77" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-865, -575)
+
+[node name="coin66" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(-387, -581)
+
+[node name="coin9" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(363, -43)
+
+[node name="coin8" parent="Coins" instance=ExtResource("10_cksh1")]
+position = Vector2(218, -45)
+
 [node name="level2_button" type="Button" parent="."]
-offset_left = -1013.0
-offset_top = -600.0
-offset_right = -923.0
-offset_bottom = -569.0
+offset_left = -1012.0
+offset_top = -598.0
+offset_right = -922.0
+offset_bottom = -567.0
 text = "Next Level"
 script = SubResource("GDScript_6aw32")
 
 [node name="slime" parent="." instance=ExtResource("7_1ptde")]
-position = Vector2(-912, -580)
-
-[node name="coin6" parent="." instance=ExtResource("10_cksh1")]
-position = Vector2(201, -602)
-
-[node name="coin7" parent="." instance=ExtResource("10_cksh1")]
-position = Vector2(120, 5)
-
-[node name="coin8" parent="." instance=ExtResource("10_cksh1")]
-position = Vector2(218, -45)
-
-[node name="coin9" parent="." instance=ExtResource("10_cksh1")]
-position = Vector2(363, -43)
+position = Vector2(-886, -580)
 
 [node name="slime3" parent="." instance=ExtResource("7_1ptde")]
 position = Vector2(974, -45)
@@ -467,21 +702,8 @@ position = Vector2(87, 8)
 shape = SubResource("SegmentShape2D_8ujt1")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 120.0
 autostart = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="TimerLabel" type="Label" parent="CanvasLayer"]
-offset_left = 23.0
-offset_top = 19.0
-offset_right = 271.0
-offset_bottom = 63.0
-theme_override_fonts/font = ExtResource("16_5j0pu")
-theme_override_font_sizes/font_size = 22
-text = "HI MY NAME IS"
-horizontal_alignment = 1
 
 [node name="slime2" parent="." instance=ExtResource("11_3teii")]
 position = Vector2(394, -579)

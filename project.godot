@@ -24,6 +24,8 @@ buses/default_bus_layout="res://assets/default_bus_layout.tres"
 [autoload]
 
 AudioManager="*res://scenes/audio_manager.tscn"
+GameManager="*res://scripts/gamemanager.gd"
+Global="*res://scripts/Global.gd"
 
 [global_group]
 

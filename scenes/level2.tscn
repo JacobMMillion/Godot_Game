@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://pxgrb7msdbhb"]
+[gd_scene load_steps=31 format=3 uid="uid://pxgrb7msdbhb"]
 
 [ext_resource type="Script" path="res://scenes/level_2.gd" id="1_oai3m"]
 [ext_resource type="Script" path="res://scripts/gamemanager.gd" id="1_sm5xb"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c7dccdipugaup" path="res://scenes/camera.tscn" id="8_qmk1r"]
 [ext_resource type="Script" path="res://scenes/trigger_area.gd" id="10_i7ud0"]
 [ext_resource type="PackedScene" uid="uid://ceqxf1i7b35g1" path="res://scenes/golem_level_2.tscn" id="10_l2f5d"]
+[ext_resource type="FontFile" uid="uid://4f8wk8lv1a0s" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="11_4l8vr"]
 [ext_resource type="Script" path="res://scenes/golem_level_2.gd" id="11_ytfxr"]
 [ext_resource type="PackedScene" uid="uid://d0peenktlwjg7" path="res://scenes/simple_gun.tscn" id="13_u1ktb"]
 [ext_resource type="PackedScene" uid="uid://d3vhv70cpncol" path="res://scenes/speech_bubble.tscn" id="14_medmq"]
@@ -828,8 +829,40 @@ position = Vector2(614, 87)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
 shape = SubResource("WorldBoundaryShape2D_ijtds")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 32.0
+offset_top = 53.0
+offset_right = 280.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.988957, 0.988957, 0.988957, 1)
+theme_override_colors/font_outline_color = Color(0.238559, 0.438892, 0.642115, 1)
+theme_override_constants/shadow_offset_x = 14
+theme_override_constants/shadow_offset_y = 9
+theme_override_constants/outline_size = 90
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("11_4l8vr")
+theme_override_font_sizes/font_size = 22
+text = "HI MY NAME IS"
+
+[node name="LootCount" type="Label" parent="CanvasLayer"]
+offset_left = 758.0
+offset_top = 56.0
+offset_right = 984.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(72.043, 60.215, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.766856, 0.253251, 1)
+theme_override_colors/font_outline_color = Color(0.31443, 0.417581, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 45
+theme_override_fonts/font = ExtResource("11_4l8vr")
+theme_override_font_sizes/font_size = 22
+text = "LOOT COUNT:"
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 75.0
+wait_time = 150.0
 autostart = true
 
 [node name="TriggerArea" type="Area2D" parent="."]
@@ -969,6 +1002,8 @@ libraries = {
 "": SubResource("AnimationLibrary_s8cd2")
 }
 autoplay = "move"
+
+[node name="Score" type="Node" parent="."]
 
 [connection signal="body_entered" from="TriggerArea" to="TriggerArea" method="_on_body_entered"]
 [connection signal="body_exited" from="TriggerArea" to="TriggerArea" method="_on_body_exited"]
