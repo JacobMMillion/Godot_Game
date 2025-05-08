@@ -30,3 +30,7 @@ func _process(delta):
 		time_label.add_theme_color_override("font_color", Color.WHITE)		
 func _on_Timer_timeout():
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+
+
+func _on_level_3_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/level3.tscn")
