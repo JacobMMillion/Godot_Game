@@ -461,6 +461,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_ulifj"]
 resource_name = "new_animation"
 length = 2.0
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1076,6 +1077,7 @@ position = Vector2(2976, 272)
 libraries = {
 "": SubResource("AnimationLibrary_wa7r2")
 }
+autoplay = "new_animation"
 
 [node name="Button" type="Button" parent="."]
 offset_left = 3307.0
