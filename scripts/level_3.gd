@@ -13,17 +13,18 @@ func _ready():
 	timer.timeout.connect(_on_Timer_timeout)
 	timer.start()  
 	time_label.text = "Time: " + str(int(timer.wait_time))
-	player.speak("Time for some shooting practice!", 3.0)
-	player.speak("I need my gun...", 3.0)
+	
 	
 func _process(delta):
 	time_label.text = "Time: " + str(int(timer.time_left))
-	if timer.time_left > 0 and timer.time_left < 10:
+	if timer.time_left > 0 and timer.time_left < 5:
 		time_label.add_theme_color_override("font_color", Color.RED)
 	else: 
 		time_label.add_theme_color_override("font_color", Color.WHITE)		
+
 func _on_Timer_timeout():
-	player.die()
+	get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	
 func end_level():
-	get_tree().reload_current_scene()
+	get_tree().paused = true
+	$GameOverUI.visible = true

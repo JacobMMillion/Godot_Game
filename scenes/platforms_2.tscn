@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnh1of1w37w6d"]
+
+[ext_resource type="Texture2D" uid="uid://v4fyr05ch5g0" path="res://assets/level3assets/3 Objects/Ridges/5.png" id="1_0hwde"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wc74"]
+size = Vector2(69, 25)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_4wc74")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 3.25)
+scale = Vector2(0.790123, 0.775862)
+texture = ExtResource("1_0hwde")

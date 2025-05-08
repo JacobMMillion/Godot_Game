@@ -29,7 +29,4 @@ func _process(delta):
 	else: 
 		time_label.add_theme_color_override("font_color", Color.WHITE)		
 func _on_Timer_timeout():
-	player.die()
-
-func _on_level_3_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/level_3.tscn")
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
