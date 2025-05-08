@@ -25,7 +25,7 @@ var equipped_gun: Node = null
 var is_dead = false
 
 func _ready():
-	pass
+	speech_bubble.visible = false
 	
 func _physics_process(delta: float) -> void:
 	# Handle roll timer.
@@ -181,5 +181,10 @@ func die() -> void:
 	
 	# Start over
 	tree.reload_current_scene()
-	
+
+func speak(speech: String, duration: float):
+	speech_bubble.text = speech
+	speech_bubble.visible = true
+	await get_tree().create_timer(duration).timeout
+	speech_bubble.visible = false
 	

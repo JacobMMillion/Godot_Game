@@ -16,7 +16,7 @@ func _ready():
 	timer.timeout.connect(_on_Timer_timeout)
 	timer.start()  
 	time_label.text = "Time: " + str(int(timer.wait_time))
-	player.speak("Time for some shooting practice!", 3.0)
+	#player.speak("Time for some shooting practice!", 3.0)
 
 func _process(delta):
 	time_label.text = "Time: " + str(int(timer.time_left))
