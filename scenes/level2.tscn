@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://pxgrb7msdbhb"]
+[gd_scene load_steps=31 format=3 uid="uid://pxgrb7msdbhb"]
 
 [ext_resource type="Script" path="res://scenes/level_2.gd" id="1_oai3m"]
 [ext_resource type="Script" path="res://scripts/gamemanager.gd" id="1_sm5xb"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://d3vhv70cpncol" path="res://scenes/speech_bubble.tscn" id="14_medmq"]
 [ext_resource type="PackedScene" uid="uid://demx3rfl2ini7" path="res://scenes/ai_slime.tscn" id="15_r4tdr"]
 [ext_resource type="PackedScene" uid="uid://cjqppim8o1ola" path="res://scenes/shotgun.tscn" id="19_m4hb3"]
+[ext_resource type="PackedScene" uid="uid://d0peenktlwjg7" path="res://scenes/simple_gun.tscn" id="20_l6bnk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dnomf"]
 texture = ExtResource("3_d5q7r")
@@ -976,7 +977,7 @@ position = Vector2(381, -447)
 position = Vector2(403, -448)
 
 [node name="coin12" parent="Coins" instance=ExtResource("8_pvl7r")]
-position = Vector2(661, -446)
+position = Vector2(661, -427)
 
 [node name="Level3_Button" type="Button" parent="."]
 offset_left = 920.0
@@ -1004,9 +1005,6 @@ libraries = {
 autoplay = "move"
 
 [node name="Score" type="Node" parent="."]
-
-[node name="Shotgun2" parent="." instance=ExtResource("19_m4hb3")]
-position = Vector2(-281, -426)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 576.0
@@ -1078,6 +1076,9 @@ ARE
 
 WE"
 horizontal_alignment = 1
+
+[node name="SimpleGun" parent="." instance=ExtResource("20_l6bnk")]
+position = Vector2(-281, -426)
 
 [connection signal="body_entered" from="TriggerArea" to="TriggerArea" method="_on_body_entered"]
 [connection signal="body_exited" from="TriggerArea" to="TriggerArea" method="_on_body_exited"]
