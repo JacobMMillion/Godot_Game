@@ -651,6 +651,11 @@ offset_left = -1012.0
 offset_top = -598.0
 offset_right = -922.0
 offset_bottom = -567.0
+theme_override_colors/icon_normal_color = Color(0.175151, 0.407056, 1, 1)
+theme_override_colors/icon_focus_color = Color(0, 0.207427, 1, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0.710683, 2.5028e-06, 1)
+theme_override_colors/icon_hover_color = Color(0.698247, 1, 0.671603, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0.78852, 0, 1)
 text = "Next Level"
 script = SubResource("GDScript_6aw32")
 
@@ -700,7 +705,7 @@ position = Vector2(87, 8)
 shape = SubResource("SegmentShape2D_8ujt1")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 120.0
+wait_time = 150.0
 autostart = true
 
 [node name="slime2" parent="." instance=ExtResource("11_3teii")]
@@ -735,6 +740,59 @@ position = Vector2(-622, -580)
 
 [node name="slime14" parent="." instance=ExtResource("7_1ptde")]
 position = Vector2(-170, -580)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -653.0
+offset_top = -59.0
+offset_right = -495.0
+offset_bottom = -36.0
+theme_override_colors/font_shadow_color = Color(0.760784, 0.819608, 0, 1)
+theme_override_fonts/font = ExtResource("5_qogf0")
+theme_override_font_sizes/font_size = 12
+text = "Beware of Slimes"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 500.0
+offset_top = -91.0
+offset_right = 893.0
+offset_bottom = -68.0
+theme_override_colors/font_shadow_color = Color(0.760784, 0.113725, 0, 1)
+theme_override_fonts/font = ExtResource("5_qogf0")
+theme_override_font_sizes/font_size = 12
+text = "Slimes possess a fatal poison
+upon contact"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 945.0
+offset_top = -96.0
+offset_right = 1338.0
+offset_bottom = -67.0
+theme_override_colors/font_shadow_color = Color(0.760784, 0.819608, 0, 1)
+theme_override_fonts/font = ExtResource("5_qogf0")
+theme_override_font_sizes/font_size = 12
+text = "Shoot to kill them or hop to avoid them"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 337.0
+offset_top = -623.0
+offset_right = 730.0
+offset_bottom = -594.0
+theme_override_colors/font_color = Color(0, 0.360331, 8.18223e-07, 1)
+theme_override_colors/font_shadow_color = Color(0.760784, 0.819608, 0, 1)
+theme_override_fonts/font = ExtResource("5_qogf0")
+theme_override_font_sizes/font_size = 12
+text = "Collect coins to build your ROTH IRA"
+
+[node name="Label5" type="Label" parent="."]
+offset_left = -662.0
+offset_top = -620.0
+offset_right = -269.0
+offset_bottom = -591.0
+theme_override_colors/font_color = Color(0, 0.360784, 0.796078, 1)
+theme_override_colors/font_shadow_color = Color(0.141176, 0.819608, 0, 1)
+theme_override_fonts/font = ExtResource("5_qogf0")
+theme_override_font_sizes/font_size = 12
+text = "Almost there....."
 
 [connection signal="pressed" from="level2_button" to="." method="_on_level_2_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

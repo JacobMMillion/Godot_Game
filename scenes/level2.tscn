@@ -860,7 +860,7 @@ theme_override_font_sizes/font_size = 22
 text = "LOOT COUNT:"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 150.0
+wait_time = 200.0
 autostart = true
 
 [node name="TriggerArea" type="Area2D" parent="."]
@@ -984,6 +984,11 @@ offset_top = 51.0
 offset_right = 1010.0
 offset_bottom = 82.0
 scale = Vector2(0.5, 0.5)
+theme_override_colors/icon_normal_color = Color(0, 0.701961, 0.831373, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0.733333, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0.792157, 0, 1)
+theme_override_colors/icon_hover_color = Color(0.47337, 0.902302, 0.567597, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0.866667, 0, 1)
 text = "Next Level"
 
 [node name="Shotgun" parent="." instance=ExtResource("19_m4hb3")]
@@ -1002,6 +1007,77 @@ autoplay = "move"
 
 [node name="Shotgun2" parent="." instance=ExtResource("19_m4hb3")]
 position = Vector2(-281, -426)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 576.0
+offset_top = 32.0
+offset_right = 616.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.784314, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ltamc")
+theme_override_font_sizes/font_size = 11
+text = "Beware of Lava"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = -80.0
+offset_top = -472.0
+offset_right = 65.0
+offset_bottom = -449.0
+theme_override_colors/font_color = Color(0.556863, 0.815686, 0.137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.670588, 1)
+theme_override_colors/font_outline_color = Color(0, 0.701961, 0.756863, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("2_ltamc")
+theme_override_font_sizes/font_size = 11
+text = "Beware of Slimes"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 600.0
+offset_top = -472.0
+offset_right = 745.0
+offset_bottom = -449.0
+theme_override_colors/font_color = Color(0.556863, 0.815686, 0.137255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.670588, 1)
+theme_override_colors/font_outline_color = Color(0, 0.701961, 0.756863, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("2_ltamc")
+theme_override_font_sizes/font_size = 11
+text = "Beware of Slimes"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 152.0
+offset_top = -400.0
+offset_right = 280.0
+offset_bottom = -25.0
+theme_override_colors/font_color = Color(0.950673, 0.940997, 0.933997, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.701961, 0.913725, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.796078, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("2_ltamc")
+theme_override_font_sizes/font_size = 14
+text = "AWAITS
+
+WHAT
+
+WONDER
+
+I
+
+UP
+
+WAY
+
+THE
+
+ALL
+
+GOING
+
+ARE
+
+WE"
+horizontal_alignment = 1
 
 [connection signal="body_entered" from="TriggerArea" to="TriggerArea" method="_on_body_entered"]
 [connection signal="body_exited" from="TriggerArea" to="TriggerArea" method="_on_body_exited"]
