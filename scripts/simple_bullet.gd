@@ -11,12 +11,15 @@ var velocity: Vector2 = Vector2.ZERO
 const SMALL_EXPLOSION_SCENE = preload("res://scenes/small_explosion.tscn")
 
 func _ready() -> void:
-	# muzzle‑flash on frame one
+	# wait one frame so everything’s initialized
 	await get_tree().process_frame
+
 	var mini_explosion = SMALL_EXPLOSION_SCENE.instantiate()
 	mini_explosion.scale = Vector2(0.2, 0.2)
 	mini_explosion.global_position = global_position
-	get_tree().current_scene.add_child(mini_explosion)
+
+	# ← instead of current_scene:
+	get_parent().add_child(mini_explosion)
 
 	connect("body_entered", Callable(self, "_on_collision"))
 	connect("area_entered", Callable(self, "_on_collision"))

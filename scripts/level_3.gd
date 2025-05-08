@@ -28,3 +28,12 @@ func _on_Timer_timeout():
 func end_level():
 	get_tree().paused = true
 	$GameOverUI.visible = true
+
+
+func _on_button_pressed() -> void:
+	var err = get_tree().change_scene_to_file("res://scenes/ending_scene.tscn")
+	print("pressed → change_scene_to_file() returned: ", err)
+	if err != OK:
+		printerr("⚠️ Scene swap failed with error code ", err)
+	else:
+		print("✅ Scene change succeeded")
